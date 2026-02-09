@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Oswald:wght@700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.grid-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0;
+}
+
+.grid-cell {
+  border: 1px solid #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+  transition: background-color 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+/* Content container */
+.cell-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  width: 100%;
+}
+
+/* DEFAULT TITLE - Academic, structured typography */
+.title-default {
+  font-family: "Google Sans Code", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: #000000;
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.4;
+  position: relative;
+  z-index: 3;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* HOVER TITLE - Bold, experimental, poster-like typography */
+.title-hover {
+  font-family: "Bebas Neue", "Anton", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  font-size: 4.5rem;
+  text-align: center;
+  line-height: 1;
+  position: absolute;
+  z-index: 3;
+  opacity: 0;
+  transform: scale(0.85) translateY(15px);
+  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-transform: uppercase;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover state transitions */
+.grid-cell:hover {
+  background-color: #000000;
+}
+
+.grid-cell:hover .title-default {
+  opacity: 0;
+  transform: scale(0.9) translateY(-15px);
+}
+
+.grid-cell:hover .title-hover {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition-delay: 0.1s;
+}
+
+/* Tech Icon Container - Foreground element only on hover */
+.tech-icon-container {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateX(-60px) translateY(50px) scale(0.4) rotate(-25deg);
+  transition: all 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.grid-cell:hover .tech-icon-container {
+  opacity: 0.25;
+  transform: translateX(0) translateY(0) scale(1) rotate(0deg);
+  transition-delay: 0.2s;
+}
+
+.tech-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* Emoji container - Only visible on hover */
+.emoji-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 320px;
+  position: relative;
+  z-index: 4;
+}
+
+.emoji {
+  font-size: 2.5rem;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(50px) scale(0.2) rotate(-30deg);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Playful elastic emoji entrance on hover */
+.grid-cell:hover .emoji {
+  animation: emojiElasticPop 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: var(--emoji-delay);
+}
+
+@keyframes emojiElasticPop {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.2) rotate(-30deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-15px) scale(1.25) rotate(12deg);
+  }
+  70% {
+    transform: translateY(5px) scale(0.9) rotate(-6deg);
+  }
+  85% {
+    transform: translateY(-3px) scale(1.08) rotate(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+/* Continuous floating after entrance */
+.grid-cell:hover .emoji {
+  animation: emojiElasticPop 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             emojiFloatContinuous 3.5s ease-in-out infinite;
+  animation-delay: var(--emoji-delay), calc(var(--emoji-delay) + 0.85s);
+}
+
+@keyframes emojiFloatContinuous {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translateY(-8px) rotate(4deg) scale(1.03);
+  }
+  66% {
+    transform: translateY(-4px) rotate(-3deg) scale(0.98);
+  }
+}
+
+/* Unique float variations for different emoji positions */
+.emoji:nth-child(1) {
+  --float-variation: 1.1;
+}
+
+.emoji:nth-child(2) {
+  --float-variation: 0.9;
+}
+
+.emoji:nth-child(3) {
+  --float-variation: 1.05;
+}
+
+.emoji:nth-child(4) {
+  --float-variation: 0.95;
+}
+
+.emoji:nth-child(5) {
+  --float-variation: 1.02;
+}
+
+/* Graceful exit animation when hover ends */
+.grid-cell:not(:hover) .emoji {
+  animation: emojiShrinkAway 0.55s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+}
+
+@keyframes emojiShrinkAway {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.3) rotate(20deg);
+  }
+}
+
+/* Tech icon exit animation */
+.grid-cell:not(:hover) .tech-icon-container {
+  animation: techIconSlideOut 0.6s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+}
+
+@keyframes techIconSlideOut {
+  0% {
+    opacity: 0.25;
+    transform: translateX(0) translateY(0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(60px) translateY(-50px) scale(0.4) rotate(25deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(9, 1fr);
+  }
+  
+  .title-default {
+    font-size: 1.2rem;
+  }
+
+  .title-hover {
+    font-size: 2.8rem;
+  }
+
+  .emoji {
+    font-size: 1.8rem;
+  }
+
+  .emoji-container {
+    gap: 10px;
+    max-width: 240px;
+  }
+
+  .tech-icon-container {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-default {
+    font-size: 1rem;
+  }
+
+  .title-hover {
+    font-size: 2.2rem;
+  }
+
+  .emoji {
+    font-size: 1.5rem;
+  }
+
+  .emoji-container {
+    gap: 8px;
+    max-width: 200px;
+  }
+
+  .tech-icon-container {
+    width: 110px;
+    height: 110px;
+  }
+}
