@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <g id="project-windows">
+    <rect 
+      x="52" 
+      y="48" 
+      width="70" 
+      height="52" 
+      rx="4" 
+      stroke="#FFFFFF" 
+      stroke-width="2.5" 
+      fill="none" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
+    <rect 
+      x="78" 
+      y="56" 
+      width="70" 
+      height="52" 
+      rx="4" 
+      stroke="#FFFFFF" 
+      stroke-width="2.5" 
+      fill="none" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
+  </g>
+  
+  <g id="laptop-body">
+    <rect 
+      x="55" 
+      y="125" 
+      width="90" 
+      height="8" 
+      rx="2" 
+      stroke="#FFFFFF" 
+      stroke-width="2.5" 
+      fill="none" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
+    <path 
+      d="M 48 133 L 152 133 L 148 140 L 52 140 Z" 
+      stroke="#FFFFFF" 
+      stroke-width="2.5" 
+      fill="none" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
+  </g>
+  
+  <g id="screen">
+    <rect 
+      x="60" 
+      y="70" 
+      width="80" 
+      height="55" 
+      rx="3" 
+      stroke="#FFFFFF" 
+      stroke-width="2.5" 
+      fill="none" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
+  </g>
+  
+  <g id="keyboard">
+    <line 
+      x1="68" 
+      y1="130" 
+      x2="132" 
+      y2="130" 
+      stroke="#FFFFFF" 
+      stroke-width="1.5" 
+      stroke-linecap="round"
+    />
+    <line 
+      x1="72" 
+      y1="127" 
+      x2="128" 
+      y2="127" 
+      stroke="#FFFFFF" 
+      stroke-width="1.5" 
+      stroke-linecap="round"
+    />
+  </g>
+  
+  <g id="brackets">
+    <path 
+      d="M 88 92 L 84 92 L 84 105 L 88 105" 
+      stroke="#FFFFFF" 
+      stroke-width="2.5" 
+      fill="none" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
+    <path 
+      d="M 112 92 L 116 92 L 116 105 L 112 105" 
+      stroke="#FFFFFF" 
+      stroke-width="2.5" 
+      fill="none" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
+  </g>
+</svg>

@@ -7,7 +7,8 @@
   box-sizing: border-box;
 }
 
-body, html {
+body,
+html {
   width: 100%;
   height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -32,7 +33,7 @@ body, html {
   position: relative;
   overflow: hidden;
   background-color: #ffffff;
-  transition: background-color 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.3s ease;
   cursor: pointer;
 }
 
@@ -62,8 +63,7 @@ body, html {
   z-index: 3;
   opacity: 1;
   transform: scale(1);
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /* HOVER TITLE - Bold, experimental, poster-like typography */
@@ -78,11 +78,9 @@ body, html {
   position: absolute;
   z-index: 3;
   opacity: 0;
-  transform: scale(0.85) translateY(15px);
-  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
-              transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: scale(1);
+  transition: opacity 0.3s ease;
   text-transform: uppercase;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Hover state transitions */
@@ -92,34 +90,28 @@ body, html {
 
 .grid-cell:hover .title-default {
   opacity: 0;
-  transform: scale(0.9) translateY(-15px);
 }
 
 .grid-cell:hover .title-hover {
   opacity: 1;
-  transform: scale(1) translateY(0);
-  transition-delay: 0.1s;
 }
 
 /* Tech Icon Container - Foreground element only on hover */
 .tech-icon-container {
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transform: translateX(-60px) translateY(50px) scale(0.4) rotate(-25deg);
-  transition: all 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 0.3s ease;
   pointer-events: none;
   z-index: 2;
 }
 
 .grid-cell:hover .tech-icon-container {
   opacity: 0.25;
-  transform: translateX(0) translateY(0) scale(1) rotate(0deg);
-  transition-delay: 0.2s;
 }
 
 .tech-icon {
@@ -127,124 +119,106 @@ body, html {
   height: 100%;
   object-fit: contain;
   filter: brightness(0) invert(1);
+  transform: scale(0.75);
 }
 
-/* Emoji container - Only visible on hover */
-.emoji-container {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 320px;
-  position: relative;
-  z-index: 4;
+/* SVG Animation Styles for Floating Project Cards */
+.tech-icon svg {
+  transition: transform 0.4s ease;
 }
 
-.emoji {
-  font-size: 2.5rem;
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(50px) scale(0.2) rotate(-30deg);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+.grid-cell:hover .tech-icon svg {
+  transform: scale(1.05);
 }
 
-/* Playful elastic emoji entrance on hover */
-.grid-cell:hover .emoji {
-  animation: emojiElasticPop 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  animation-delay: var(--emoji-delay);
+/* Top card - tilts and lifts on hover */
+.tech-icon svg #laptop-body {
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+  transform-box: fill-box;
 }
 
-@keyframes emojiElasticPop {
-  0% {
-    opacity: 0;
-    transform: translateY(50px) scale(0.2) rotate(-30deg);
+.grid-cell:hover .tech-icon svg #laptop-body {
+  transform: translateY(-12px) rotate(-3deg);
+}
+
+/* Bottom and middle cards - slide outward vertically */
+.tech-icon svg #project-windows rect:nth-child(1),
+.tech-icon svg #project-windows rect:nth-child(5) {
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* Bottom card slides down */
+.grid-cell:hover .tech-icon svg #project-windows rect:nth-child(1),
+.grid-cell:hover .tech-icon svg #project-windows line:nth-child(2),
+.grid-cell:hover .tech-icon svg #project-windows line:nth-child(3),
+.grid-cell:hover .tech-icon svg #project-windows line:nth-child(4) {
+  transform: translateY(8px);
+}
+
+/* Middle card slides up slightly */
+.grid-cell:hover .tech-icon svg #project-windows rect:nth-child(5),
+.grid-cell:hover .tech-icon svg #project-windows line:nth-child(6),
+.grid-cell:hover .tech-icon svg #project-windows line:nth-child(7),
+.grid-cell:hover .tech-icon svg #project-windows line:nth-child(8) {
+  transform: translateY(-4px);
+}
+
+/* Apply transitions to all lines within project-windows */
+.tech-icon svg #project-windows line {
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* Apply transitions to all elements in top card */
+.tech-icon svg #laptop-body rect,
+.tech-icon svg #laptop-body line {
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.grid-cell:hover .tech-icon svg #laptop-body rect,
+.grid-cell:hover .tech-icon svg #laptop-body line {
+  transform: translateY(-12px) rotate(-3deg);
+}
+
+/* SVG Animation Styles for Skills Cogwheel */
+
+/* Main gear rotates on hover */
+.tech-icon svg #gear-main {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.grid-cell:hover .tech-icon svg #gear-main {
+  transform: rotate(30deg);
+}
+
+/* Inner hub - pulse scale animation */
+.tech-icon svg #inner-hub {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.grid-cell:hover .tech-icon svg #inner-hub {
+  animation: hubPulse 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes hubPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
   }
+
   50% {
-    opacity: 1;
-    transform: translateY(-15px) scale(1.25) rotate(12deg);
-  }
-  70% {
-    transform: translateY(5px) scale(0.9) rotate(-6deg);
-  }
-  85% {
-    transform: translateY(-3px) scale(1.08) rotate(3deg);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-}
-
-/* Continuous floating after entrance */
-.grid-cell:hover .emoji {
-  animation: emojiElasticPop 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-             emojiFloatContinuous 3.5s ease-in-out infinite;
-  animation-delay: var(--emoji-delay), calc(var(--emoji-delay) + 0.85s);
-}
-
-@keyframes emojiFloatContinuous {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg) scale(1);
-  }
-  33% {
-    transform: translateY(-8px) rotate(4deg) scale(1.03);
-  }
-  66% {
-    transform: translateY(-4px) rotate(-3deg) scale(0.98);
-  }
-}
-
-/* Unique float variations for different emoji positions */
-.emoji:nth-child(1) {
-  --float-variation: 1.1;
-}
-
-.emoji:nth-child(2) {
-  --float-variation: 0.9;
-}
-
-.emoji:nth-child(3) {
-  --float-variation: 1.05;
-}
-
-.emoji:nth-child(4) {
-  --float-variation: 0.95;
-}
-
-.emoji:nth-child(5) {
-  --float-variation: 1.02;
-}
-
-/* Graceful exit animation when hover ends */
-.grid-cell:not(:hover) .emoji {
-  animation: emojiShrinkAway 0.55s cubic-bezier(0.4, 0, 0.6, 1) forwards;
-}
-
-@keyframes emojiShrinkAway {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(40px) scale(0.3) rotate(20deg);
-  }
-}
-
-/* Tech icon exit animation */
-.grid-cell:not(:hover) .tech-icon-container {
-  animation: techIconSlideOut 0.6s cubic-bezier(0.4, 0, 0.6, 1) forwards;
-}
-
-@keyframes techIconSlideOut {
-  0% {
-    opacity: 0.25;
-    transform: translateX(0) translateY(0) scale(1) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(60px) translateY(-50px) scale(0.4) rotate(25deg);
+    transform: scale(1.1);
   }
 }
 
@@ -254,7 +228,7 @@ body, html {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(9, 1fr);
   }
-  
+
   .title-default {
     font-size: 1.2rem;
   }
@@ -263,18 +237,9 @@ body, html {
     font-size: 2.8rem;
   }
 
-  .emoji {
-    font-size: 1.8rem;
-  }
-
-  .emoji-container {
-    gap: 10px;
-    max-width: 240px;
-  }
-
   .tech-icon-container {
-    width: 140px;
-    height: 140px;
+    width: 200px;
+    height: 200px;
   }
 }
 
@@ -287,17 +252,8 @@ body, html {
     font-size: 2.2rem;
   }
 
-  .emoji {
-    font-size: 1.5rem;
-  }
-
-  .emoji-container {
-    gap: 8px;
-    max-width: 200px;
-  }
-
   .tech-icon-container {
-    width: 110px;
-    height: 110px;
+    width: 160px;
+    height: 160px;
   }
 }
