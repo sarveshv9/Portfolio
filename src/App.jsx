@@ -1,11 +1,18 @@
 import React from 'react';
-import GridLines from './components/GridLines';
+import './App.css';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import AntigravityEffect from './components/AntigravityEffect';
 
 function App() {
   return (
-    <div className="App">
-      <GridLines />
-    </div>
+    <>
+      <AntigravityEffect />
+      <div className="app-container">
+        <Header />
+        <Hero />
+      </div>
+    </>
   );
 }
 
