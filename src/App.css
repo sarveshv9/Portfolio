@@ -11,15 +11,16 @@ body,
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-color: #F7F7F7;
 }
 
-.app-container {
+.pinned-section {
     position: relative;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    background-color: transparent;
-    margin: 0;
-    padding: 0;
-    z-index: 10;
+    /* Ensure it takes full height to be pinned properly */
+    z-index: 1;
+    /* Lower than About */
 }
+
+/* Original .app-container styles can be removed or adapted if needed, but for now we just need the pinned section to be below About */

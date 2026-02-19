@@ -1,0 +1,199 @@
+/* ── About Screen ── */
+.about-screen {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    color: #fff;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* ── Center Text ── */
+.about-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 860px;
+    width: 56%;
+    padding: 2.5rem 3rem;
+}
+
+.about-heading {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    background: linear-gradient(to right, #fff, #aaa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+}
+
+.about-text {
+    font-size: 1.2rem;
+    line-height: 1.65;
+    color: #ccc;
+    text-align: justify;
+}
+
+.about-text p {
+    margin-bottom: 1.25rem;
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* ── Images Layer ── */
+.images-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ── Each image wrapper ── */
+.parallax-image {
+    position: absolute;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.75);
+    border-radius: 3px;
+}
+
+.parallax-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/*
+  Content safe zone: ~22vw–78vw horizontally, ~18vh–82vh vertically.
+  Left/right bands vary in size, vertical position, depth offset, and rotation
+  so neither side looks like a mirror of the other.
+*/
+
+/* ══ LEFT BAND ══ */
+
+/* Upper-left: close to edge, large, steep tilt */
+.img-1 {
+    width: 18vw;
+    height: 11vw;
+    top: 18vh;
+    left: 3vw;
+    transform: rotate(-6deg);
+}
+
+/* Mid-left: pushed in further, smaller, barely tilted */
+.img-2 {
+    width: 16vw;
+    height: 12vw;
+    top: 43vh;
+    left: 10vw;
+    transform: rotate(2deg);
+}
+
+/* Lower-left: close to edge again, medium, positive tilt */
+.img-3 {
+    width: 17vw;
+    height: 10vw;
+    top: 69vh;
+    left: 2vw;
+    transform: rotate(7deg);
+}
+
+/* ══ RIGHT BAND ══ */
+
+/* Upper-right: pushed in, smaller, gentle tilt */
+.img-7 {
+    width: 15vw;
+    height: 15vw;
+    top: 16vh;
+    right: 8vw;
+    transform: rotate(2deg);
+}
+
+/* Mid-right: close to edge, largest on right, steep negative tilt */
+.img-8 {
+    width: 10vw;
+    height: 15vw;
+    top: 44vh;
+    right: 9vw;
+    transform: rotate(-7deg);
+}
+
+/* Lower-right: pushed in, small, barely tilted */
+.img-9 {
+    width: 16vw;
+    height: 13vw;
+    top: 75vh;
+    right: 10vw;
+    transform: rotate(-2deg);
+}
+
+/* ══ TOP BAND ══ */
+.img-4 {
+    width: 19vw;
+    height: 13vw;
+    top: 8.5vh;
+    left: 31vw;
+    transform: rotate(-3deg);
+}
+
+.img-5 {
+    width: 10vw;
+    height: 15vw;
+    top: 8vh;
+    right: 28vw;
+    transform: rotate(4deg);
+}
+
+/* ══ BOTTOM BAND ══ */
+.img-6 {
+    width: 15vw;
+    height: 10.5vw;
+    bottom: 1.5vh;
+    left: 28vw;
+    transform: rotate(4deg);
+}
+
+.img-10 {
+    width: 15vw;
+    height: 10.5vw;
+    bottom: 2vh;
+    right: 34vw;
+    transform: rotate(-3deg);
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+    .about-content {
+        width: 80%;
+        max-width: 80%;
+        padding: 1.5rem;
+    }
+
+    .about-heading {
+        font-size: 2.8rem;
+    }
+
+    .about-text {
+        font-size: 0.85rem;
+    }
+
+    .img-4,
+    .img-5,
+    .img-6,
+    .img-10 {
+        display: none;
+    }
+
+    .parallax-image {
+        width: 16vw !important;
+        height: 24vw !important;
+    }
+}

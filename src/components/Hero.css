@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
+
+.hero {
+    min-height: 94vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    padding-top: 18vh;
+}
+
+.hero-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 4rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    text-align: center;
+}
+
+.hero-name {
+    font-family: "Special Gothic Expanded One", cursive;
+    font-weight: 900;
+    font-style: normal;
+    font-size: clamp(5rem, 15vw, 10rem);
+    margin: 0;
+    color: #000;
+    line-height: 0.6;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-name span {
+    font-size: clamp(4.1rem, 15vw, 8.2rem);
+}
+
+.hero-intro {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: #333;
+    margin-top: 2.5rem;
+    font-weight: 300;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.connecting-line-hero {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 150px;
+    background-color: #000;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-container {
+        padding: 0 1.5rem;
+    }
+
+    .hero-intro {
+        margin-top: 1rem;
+    }
+}
