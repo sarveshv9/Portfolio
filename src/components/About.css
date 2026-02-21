@@ -1,199 +1,182 @@
-/* ── About Screen ── */
-.about-screen {
+/* ── SCROLL WRAPPER (200vh allows room to scrub) ── */
+.about-wrapper {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 200vh;
     background-color: #000;
     color: #fff;
     z-index: 10;
+}
+
+/* ── STICKY CONTAINER (Pins to screen while scrubbing) ── */
+.about-sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
 }
 
-/* ── Center Text ── */
-.about-content {
+/* ── BACKGROUND MARQUEE ── */
+.marquee-container {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.15;
+}
+
+.marquee-track {
+    display: flex;
+    white-space: nowrap;
+    width: max-content;
+}
+
+.marquee-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20vw;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0;
+    color: transparent;
+    -webkit-text-stroke: 2px #fff;
+    /* Outline effect */
+    user-select: none;
+}
+
+/* ── FOREGROUND CONTENT ── */
+.about-foreground {
     position: relative;
     z-index: 10;
+    width: 90%;
+    max-width: 1300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    max-width: 860px;
-    width: 56%;
-    padding: 2.5rem 3rem;
+    padding: 2rem;
 }
 
-.about-heading {
-    font-size: 4.5rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    background: linear-gradient(to right, #fff, #aaa);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: -0.02em;
+/* ── OVERSIZED SCRUB TEXT ── */
+.scrub-statement {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3.5rem;
+    /* Reduced size for longer text */
+    font-weight: 600;
+    /* Slightly lighter weight for lots of text */
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    margin: 0 0 4rem 0;
+    max-width: 1300px;
+    text-align: center;
+    /* Ensures the paragraph block looks balanced */
 }
 
-.about-text {
-    font-size: 1.2rem;
-    line-height: 1.65;
-    color: #ccc;
-    text-align: justify;
+/* Individual words controlled by GSAP */
+.scrub-word {
+    display: inline-block;
+    will-change: opacity, color;
+    margin-right: 0.3em;
 }
 
-.about-text p {
-    margin-bottom: 1.25rem;
-}
-
-.about-text p:last-child {
-    margin-bottom: 0;
-}
-
-/* ── Images Layer ── */
-.images-layer {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* ── Each image wrapper ── */
-.parallax-image {
-    position: absolute;
-    overflow: hidden;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.75);
-    border-radius: 3px;
-}
-
-.parallax-image img {
+/* ── BUTTON (Appears at end) ── */
+.about-cta {
+    display: flex;
+    justify-content: center;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    /* opacity set by GSAP initially to 0 */
 }
 
-/*
-  Content safe zone: ~22vw–78vw horizontally, ~18vh–82vh vertically.
-  Left/right bands vary in size, vertical position, depth offset, and rotation
-  so neither side looks like a mirror of the other.
-*/
-
-/* ══ LEFT BAND ══ */
-
-/* Upper-left: close to edge, large, steep tilt */
-.img-1 {
-    width: 18vw;
-    height: 11vw;
-    top: 18vh;
-    left: 3vw;
-    transform: rotate(-6deg);
+.gallery-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem 0.75rem 2.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 100px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Mid-left: pushed in further, smaller, barely tilted */
-.img-2 {
-    width: 16vw;
-    height: 12vw;
-    top: 43vh;
-    left: 10vw;
-    transform: rotate(2deg);
+.gallery-btn .btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Lower-left: close to edge again, medium, positive tilt */
-.img-3 {
-    width: 17vw;
-    height: 10vw;
-    top: 69vh;
-    left: 2vw;
-    transform: rotate(7deg);
+.gallery-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.15);
 }
 
-/* ══ RIGHT BAND ══ */
-
-/* Upper-right: pushed in, smaller, gentle tilt */
-.img-7 {
-    width: 15vw;
-    height: 15vw;
-    top: 16vh;
-    right: 8vw;
-    transform: rotate(2deg);
+.gallery-btn:hover .btn-icon {
+    transform: scale(1.08) translateX(2px) rotate(-45deg);
+    /* playful hover */
 }
 
-/* Mid-right: close to edge, largest on right, steep negative tilt */
-.img-8 {
-    width: 10vw;
-    height: 15vw;
-    top: 44vh;
-    right: 9vw;
-    transform: rotate(-7deg);
+.gallery-btn:active {
+    transform: translateY(0);
 }
 
-/* Lower-right: pushed in, small, barely tilted */
-.img-9 {
-    width: 16vw;
-    height: 13vw;
-    top: 75vh;
-    right: 10vw;
-    transform: rotate(-2deg);
-}
-
-/* ══ TOP BAND ══ */
-.img-4 {
-    width: 19vw;
-    height: 13vw;
-    top: 8.5vh;
-    left: 31vw;
-    transform: rotate(-3deg);
-}
-
-.img-5 {
-    width: 10vw;
-    height: 15vw;
-    top: 8vh;
-    right: 28vw;
-    transform: rotate(4deg);
-}
-
-/* ══ BOTTOM BAND ══ */
-.img-6 {
-    width: 15vw;
-    height: 10.5vw;
-    bottom: 1.5vh;
-    left: 28vw;
-    transform: rotate(4deg);
-}
-
-.img-10 {
-    width: 15vw;
-    height: 10.5vw;
-    bottom: 2vh;
-    right: 34vw;
-    transform: rotate(-3deg);
-}
-
-/* ── Mobile ── */
-@media (max-width: 768px) {
-    .about-content {
-        width: 80%;
-        max-width: 80%;
-        padding: 1.5rem;
-    }
-
-    .about-heading {
+/* ── RESPONSIVE ── */
+@media (max-width: 1200px) {
+    .scrub-statement {
         font-size: 2.8rem;
     }
+}
 
-    .about-text {
-        font-size: 0.85rem;
+@media (max-width: 992px) {
+    .scrub-statement {
+        font-size: 2.5rem;
+        text-align: left;
+        /* Left align for easier reading on narrow screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .scrub-statement {
+        font-size: 2rem;
+        margin-bottom: 3rem;
+        line-height: 1.4;
     }
 
-    .img-4,
-    .img-5,
-    .img-6,
-    .img-10 {
-        display: none;
+    .marquee-text {
+        font-size: 25vw;
+        -webkit-text-stroke: 1px #fff;
     }
 
-    .parallax-image {
-        width: 16vw !important;
-        height: 24vw !important;
+    .gallery-btn {
+        padding: 0.6rem 1rem 0.6rem 2rem;
+        font-size: 1rem;
+    }
+
+    .gallery-btn .btn-icon {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scrub-statement {
+        font-size: 1.5rem;
     }
 }

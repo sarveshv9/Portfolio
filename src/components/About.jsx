@@ -1,109 +1,107 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 import './About.css';
-
-import img1 from '../assets/images/img1.jpg';
-import img2 from '../assets/images/img2.jpg';
-import img3 from '../assets/images/img3.jpg';
-import img4 from '../assets/images/img4.jpg';
-import img5 from '../assets/images/img5.jpg';
-import img6 from '../assets/images/img6.jpg';
-import img7 from '../assets/images/img7.jpg';
-import img8 from '../assets/images/img8.jpg';
-import img9 from '../assets/images/img9.jpg';
-import img10 from '../assets/images/img10.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const images = [
-    { cls: 'img-1', speed: 1.1, src: img1, alt: 'workspace' },
-    { cls: 'img-2', speed: 0.7, src: img2, alt: 'portrait' },
-    { cls: 'img-3', speed: 1.4, src: img3, alt: 'coding' },
-    { cls: 'img-4', speed: 0.9, src: img4, alt: 'person' },
-    { cls: 'img-5', speed: 1.3, src: img5, alt: 'office' },
-    { cls: 'img-6', speed: 0.6, src: img6, alt: 'landscape' },
-    { cls: 'img-7', speed: 1.5, src: img7, alt: 'laptop' },
-    { cls: 'img-8', speed: 0.8, src: img8, alt: 'model' },
-    { cls: 'img-9', speed: 1.2, src: img9, alt: 'portrait 2' },
-    { cls: 'img-10', speed: 0.5, src: img10, alt: 'nature' },
-];
-
 function About() {
-    const sectionRef = useRef(null);
-    const imagesRef = useRef([]);
+    const containerRef = useRef(null);
+    const textRef = useRef(null);
+
+    // The main statement to reveal on scroll
+    const statement = "I’m Sarvesh Varvatkar, a fourth-year Computer Engineering student who enjoys building thoughtful, simple experiences and exploring new places whenever I’m not creating.";
+    const words = statement.split(" ");
 
     useLayoutEffect(() => {
         let ctx = gsap.context(() => {
-            // Text reveal
-            gsap.fromTo('.about-text p',
-                { y: 40, opacity: 0 },
+
+            // 1. Infinite Background Marquee Animation
+            gsap.to('.marquee-track', {
+                xPercent: -50,
+                repeat: -1,
+                duration: 25,
+                ease: 'linear',
+            });
+
+            // 2. Scrubbing Text Reveal Animation
+            const wordElements = textRef.current.children;
+
+            gsap.fromTo(wordElements,
                 {
-                    y: 0,
+                    opacity: 0.1,
+                    color: '#444'
+                },
+                {
                     opacity: 1,
-                    duration: 1,
-                    stagger: 0.2,
-                    ease: 'power3.out',
+                    color: '#fff',
+                    stagger: 0.1,
+                    ease: 'none',
                     scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top 60%',
-                        toggleActions: 'play none none reverse',
-                    },
+                        trigger: containerRef.current,
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 0.5,
+                    }
                 }
             );
 
-            // Individual parallax per image
-            imagesRef.current.forEach((img, i) => {
-                const speed = images[i]?.speed ?? 1;
-                gsap.to(img, {
-                    y: () => -speed * 35,
+            // 3. Fade in the button at the very end of the scroll
+            gsap.fromTo('.about-cta',
+                { opacity: 0, y: 20 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    ease: 'power2.out',
                     scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: 1.5,
-                    },
-                });
-            });
-        }, sectionRef);
+                        trigger: containerRef.current,
+                        start: 'bottom 110%', // triggers near the end of the 200vh scroll
+                        end: 'bottom bottom',
+                        scrub: 0.5,
+                    }
+                }
+            );
+
+        }, containerRef);
 
         return () => ctx.revert();
     }, []);
 
-    const addToRefs = (el) => {
-        if (el && !imagesRef.current.includes(el)) {
-            imagesRef.current.push(el);
-        }
-    };
-
     return (
-        <section id="about" className="about-screen" ref={sectionRef}>
+        <section id="about" className="about-wrapper" ref={containerRef}>
+            <div className="about-sticky">
 
-            {/* Scattered images */}
-            <div className="images-layer">
-                {images.map(({ cls, src, alt }) => (
-                    <div key={cls} ref={addToRefs} className={`parallax-image ${cls}`}>
-                        <img src={src} alt={alt} />
+                {/* Infinite Background Marquee */}
+                <div className="marquee-container">
+                    <div className="marquee-track">
+                        <h1 className="marquee-text">PORTFOLIO DEVELOPER DESIGNER ENGINEER PORTFOLIO DEVELOPER DESIGNER ENGINEER</h1>
                     </div>
-                ))}
-            </div>
-
-            {/* Center content */}
-            <div className="about-content">
-                <h2 className="about-heading">About</h2>
-                <div className="about-text">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                    <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                    <p>
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                    </p>
                 </div>
-            </div>
 
+                {/* Foreground Content */}
+                <div className="about-foreground">
+                    <h2 className="scrub-statement" ref={textRef}>
+                        {words.map((word, index) => (
+                            <span key={index} className="scrub-word">
+                                {word}
+                            </span>
+                        ))}
+                    </h2>
+
+                    <div className="about-cta">
+                        <Link to="/gallery" className="gallery-btn">
+                            <span>Know me more</span>
+                            <div className="btn-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+
+            </div>
         </section>
     );
 }
