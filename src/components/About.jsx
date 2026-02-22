@@ -25,43 +25,43 @@ function About() {
                 ease: 'linear',
             });
 
-            // 2. Scrubbing Text Reveal Animation
+            // 2. Scrubbing Timeline for Text Reveal & Button
             const wordElements = textRef.current.children;
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 0.5,
+                }
+            });
 
-            gsap.fromTo(wordElements,
-                {
-                    opacity: 0.1,
-                    color: '#444'
-                },
+            // Reveal text word by word
+            tl.fromTo(wordElements,
+                { opacity: 0.1, color: '#444' },
                 {
                     opacity: 1,
                     color: '#fff',
                     stagger: 0.1,
                     ease: 'none',
-                    scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: 'top top',
-                        end: 'bottom bottom',
-                        scrub: 0.5,
-                    }
+                    duration: 1 // take up 1 second of relative timeline time
                 }
             );
 
-            // 3. Fade in the button at the very end of the scroll
-            gsap.fromTo('.about-cta',
+            // Fade in the button
+            tl.fromTo('.about-cta',
                 { opacity: 0, y: 20 },
                 {
                     opacity: 1,
                     y: 0,
                     ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: 'bottom 110%', // triggers near the end of the 200vh scroll
-                        end: 'bottom bottom',
-                        scrub: 0.5,
-                    }
-                }
+                    duration: 0.3 // fade in quickly
+                },
+                "-=0.1" // start slightly before text finishes
             );
+
+            // Add empty space to the timeline so it stays pinned longer
+            tl.to({}, { duration: 1 });
 
         }, containerRef);
 

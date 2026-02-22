@@ -13,7 +13,7 @@ import img8 from '../assets/images/img8.JPG';
 import img9 from '../assets/images/img9.JPG';
 import img10 from '../assets/images/img10.JPG';
 
-const images = [
+export const images = [
     { cls: 'img-1', src: img1 },
     { cls: 'img-2', src: img2 },
     { cls: 'img-3', src: img3 },
@@ -25,6 +25,7 @@ const images = [
     { cls: 'img-9', src: img9 },
     { cls: 'img-10', src: img10 },
 ];
+
 
 function Gallery() {
     return (

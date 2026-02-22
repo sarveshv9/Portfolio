@@ -7,6 +7,7 @@ import Hero from './Hero';
 import About from './About';
 import Squares from './Squares';
 import ScrollVelocity from './ScrollVelocity';
+import Work from './Work';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,6 +46,8 @@ function Home() {
                     className="custom-scroll-text"
                 />
             </div>
+
+            <Work />
         </div>
     );
 }
