@@ -4,8 +4,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Work.css';
 
-import img1 from '../assets/images/img2.JPG';
-import img2 from '../assets/images/img3.JPG';
+import img1 from '../assets/images/Veritrust.JPG';
+import img2 from '../assets/images/Dailydex.JPG';
 
 gsap.registerPlugin(ScrollTrigger);
 

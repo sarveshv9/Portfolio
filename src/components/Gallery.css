@@ -3,21 +3,19 @@
 /* ── Gallery Screen ── */
 .gallery-screen {
     position: relative;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background-color: #080808;
     color: #fff;
     z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden;
+    /* Prevent scrolling, fixed 100vh */
 }
 
 /* Vignette overlay */
 .gallery-screen::before {
     content: '';
-    position: absolute;
+    position: fixed;
     inset: 0;
     background: radial-gradient(ellipse 60% 60% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.65) 100%);
     z-index: 5;
@@ -27,7 +25,7 @@
 /* Grain texture overlay */
 .gallery-screen::after {
     content: '';
-    position: absolute;
+    position: fixed;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     background-repeat: repeat;
@@ -37,18 +35,36 @@
     opacity: 0.4;
 }
 
-/* ── Center Content ── */
-.gallery-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
+/* ── Container for grid ── */
+.gallery-scatter-grid {
+    position: absolute;
+    inset: 4vh 4vw;
+    /* maintain spacing from viewport edges */
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 1.5rem;
+    /* Base gap ensures they never touch */
+    z-index: 1;
 }
 
+/* ── Content Text ── */
+.gallery-content {
+    grid-area: 2 / 3 / 5 / 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    pointer-events: none;
+    text-align: center;
+    gap: 1.2rem;
+    padding: 2rem;
+    background: radial-gradient(circle, rgba(8, 8, 8, 0.7) 0%, rgba(8, 8, 8, 0) 70%);
+    /* subtle blur behind text */
+}
+
+/* ── Typography ── */
 .gallery-eyebrow {
     font-family: 'DM Sans', sans-serif;
     font-size: 0.7rem;
@@ -100,7 +116,7 @@
 
 /* ── Back Button ── */
 .back-btn {
-    position: absolute;
+    position: fixed;
     top: 2rem;
     left: 2rem;
     z-index: 20;
@@ -125,18 +141,18 @@
     border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* ── Images Layer ── */
-.gallery-images-layer {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-}
-
+/* ── Image Parallax Wrappers ── */
 .gallery-parallax-image {
-    position: absolute;
+    position: relative;
     overflow: hidden;
-    border-radius: 2px;
+    border-radius: 4px;
+    /* subtle premium feel */
+    background: #111;
+    /* subtle background while loading */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        z-index 0s 0.4s;
+    z-index: 1;
 }
 
 .gallery-parallax-image img {
@@ -145,110 +161,146 @@
     object-fit: cover;
     display: block;
     filter: contrast(1.05) brightness(0.88);
+    transition: filter 0.4s ease;
+}
+
+/* Hover Zoom */
+.gallery-parallax-image:hover {
+    transform: scale(1.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.1);
+    z-index: 100;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        z-index 0s;
+}
+
+.gallery-parallax-image:hover img {
+    filter: contrast(1.1) brightness(1.0);
 }
 
 /* ══════════════════════════════════════
-   DESKTOP (> 1024px)
+   DESKTOP Grid Areas & Scattering Offsets
 ══════════════════════════════════════ */
-
-/* LEFT COLUMN */
-.img-1 {
-    width: 17vw;
-    height: 12.5vw;
-    top: 8vh;
-    left: 4.5vw;
-    transform: rotate(-4deg);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
+/* Mapping images to grid layout */
+.sc-img-1 {
+    grid-area: 1 / 1 / 3 / 2;
+    align-self: end;
+    height: 85%;
+    width: 90%;
+    justify-self: end;
 }
 
-.img-2 {
-    width: 14vw;
-    height: 18vw;
-    top: 38vh;
-    left: 7.5vw;
-    transform: rotate(3.5deg);
-    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.75), 0 2px 8px rgba(0, 0, 0, 0.5);
+.sc-img-2 {
+    grid-area: 1 / 2 / 2 / 3;
+    width: 85%;
+    justify-self: center;
+    align-self: center;
+    height: 90%;
 }
 
-.img-3 {
-    width: 16vw;
-    height: 11vw;
-    top: 70vh;
-    left: 3vw;
-    transform: rotate(-5deg);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
+.sc-img-3 {
+    grid-area: 1 / 3 / 2 / 5;
+    align-self: start;
+    height: 80%;
+    width: 95%;
+    justify-self: center;
 }
 
-/* RIGHT COLUMN */
-.img-7 {
-    width: 14vw;
-    height: 17vw;
-    top: 5vh;
-    right: 5vw;
-    transform: rotate(3deg);
-    box-shadow: 0 14px 45px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
+.sc-img-4 {
+    grid-area: 1 / 5 / 3 / 6;
+    align-self: end;
+    height: 90%;
+    width: 85%;
+    justify-self: start;
 }
 
-.img-8 {
-    width: 15vw;
-    height: 11vw;
-    top: 38vh;
-    right: 6.5vw;
-    transform: rotate(-5.5deg);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75), 0 2px 8px rgba(0, 0, 0, 0.5);
+.sc-img-5 {
+    grid-area: 1 / 6 / 2 / 7;
+    width: 80%;
+    justify-self: start;
+    align-self: center;
+    height: 85%;
 }
 
-.img-9 {
-    width: 13vw;
-    height: 17vw;
-    top: 62vh;
-    right: 5.5vw;
-    transform: rotate(4deg);
-    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
+.sc-img-6 {
+    grid-area: 3 / 1 / 4 / 2;
+    width: 85%;
+    align-self: center;
+    justify-self: center;
+    height: 85%;
 }
 
-/* TOP CENTER */
-.img-4 {
-    width: 16vw;
-    height: 11vw;
-    top: 2vh;
-    left: 29vw;
-    transform: rotate(-2.5deg);
-    box-shadow: 0 14px 45px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
+.sc-img-7 {
+    grid-area: 2 / 2 / 4 / 3;
+    align-self: center;
+    height: 85%;
+    width: 90%;
+    justify-self: center;
 }
 
-.img-5 {
-    width: 13vw;
-    height: 16vw;
-    top: 1vh;
-    right: 26vw;
-    transform: rotate(3deg);
-    box-shadow: 0 14px 45px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
+.sc-img-8 {
+    grid-area: 3 / 5 / 5 / 6;
+    align-self: start;
+    height: 90%;
+    width: 95%;
+    justify-self: center;
 }
 
-/* BOTTOM CENTER */
-.img-6 {
-    width: 14vw;
-    height: 10vw;
-    bottom: 8vh;
-    left: 27vw;
-    transform: rotate(3.5deg);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
+.sc-img-9 {
+    grid-area: 2 / 6 / 4 / 7;
+    align-self: center;
+    height: 85%;
+    width: 80%;
+    justify-self: center;
 }
 
-.img-10 {
-    width: 14vw;
-    height: 10vw;
-    bottom: 8.5vh;
-    right: 29vw;
-    transform: rotate(-2.5deg);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
+.sc-img-10 {
+    grid-area: 4 / 1 / 6 / 3;
+    align-self: end;
+    height: 85%;
+    width: 90%;
+    justify-self: end;
 }
+
+.sc-img-11 {
+    grid-area: 5 / 3 / 6 / 4;
+    align-self: start;
+    height: 90%;
+    width: 85%;
+    justify-self: center;
+}
+
+.sc-img-12 {
+    grid-area: 5 / 4 / 6 / 5;
+    align-self: center;
+    height: 90%;
+    width: 90%;
+    justify-self: center;
+}
+
+.sc-img-13 {
+    grid-area: 4 / 6 / 6 / 7;
+    align-self: end;
+    height: 90%;
+    width: 85%;
+    justify-self: center;
+}
+
+.sc-img-14 {
+    grid-area: 5 / 5 / 6 / 6;
+    align-self: center;
+    height: 80%;
+    width: 90%;
+    justify-self: end;
+}
+
 
 /* ══════════════════════════════════════
-   TABLET  769px – 1024px
+   MEDIA QUERIES
 ══════════════════════════════════════ */
-@media (max-width: 1024px) and (min-width: 769px) {
+
+/* TABLET */
+@media (max-width: 1024px) {
     .gallery-heading {
         font-size: 2.4rem;
     }
@@ -256,65 +308,9 @@
     .gallery-heading span {
         font-size: 5rem;
     }
-
-    /* Shrink & re-position left column */
-    .img-1 {
-        width: 15vw;
-        height: 11vw;
-        top: 7vh;
-        left: 1.5vw;
-    }
-
-    .img-2 {
-        width: 13vw;
-        height: 17vw;
-        top: 36vh;
-        left: 2.5vw;
-    }
-
-    .img-3 {
-        width: 14vw;
-        height: 10vw;
-        top: 72vh;
-        left: 1vw;
-    }
-
-    /* Shrink & re-position right column */
-    .img-7 {
-        width: 13vw;
-        height: 16vw;
-        top: 4vh;
-        right: 1.5vw;
-    }
-
-    .img-8 {
-        width: 14vw;
-        height: 10vw;
-        top: 37vh;
-        right: 2vw;
-    }
-
-    .img-9 {
-        width: 12vw;
-        height: 16vw;
-        top: 64vh;
-        right: 1.5vw;
-    }
-
-    /* Hide center-band — not enough room without overlapping text */
-    .img-4,
-    .img-5,
-    .img-6,
-    .img-10 {
-        display: none;
-    }
 }
 
-/* ══════════════════════════════════════
-   MOBILE  ≤ 768px
-   Strategy: 3 images per side, smaller,
-   tight to edges — all within 100vh
-══════════════════════════════════════ */
+/* MOBILE */
 @media (max-width: 768px) {
     .gallery-heading {
         font-size: 1.8rem;
@@ -325,7 +321,9 @@
     }
 
     .gallery-content {
-        gap: 0.7rem;
+        padding: 1rem;
+        grid-area: 3 / 2 / 5 / 4;
+        /* Adapting center text area */
     }
 
     .gallery-eyebrow {
@@ -344,68 +342,83 @@
         font-size: 0.68rem;
     }
 
-    /* Hide center-band & bottom images — not enough room */
-    .img-4,
-    .img-5,
-    .img-6,
-    .img-10 {
+    /* Change grid proportions slightly to ensure things map alright */
+    .gallery-scatter-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        inset: 4vh 2vw;
+        gap: 0.5rem;
+        /* tighter spacing for mobile */
+    }
+
+    /* Remapping grid zones to fit tightly in a 4x6 grid */
+    .sc-img-1 {
+        grid-area: 1 / 1 / 3 / 2;
+    }
+
+    .sc-img-2 {
+        grid-area: 1 / 2 / 2 / 3;
+    }
+
+    .sc-img-3 {
+        grid-area: 1 / 3 / 2 / 5;
+    }
+
+    .sc-img-4 {
         display: none;
     }
 
-    /* LEFT COLUMN — 3 small images stacked within viewport */
-    .img-1 {
-        width: 30vw;
-        height: 21vw;
-        top: 6vh;
-        left: 5vw;
-        transform: rotate(-3deg);
+    /* Hide visually excessive imgs for small 100vh grids */
+    .sc-img-5 {
+        grid-area: 2 / 4 / 4 / 5;
     }
 
-    .img-2 {
-        width: 28vw;
-        height: 38vw;
-        top: 34vh;
-        left: 2vw;
-        transform: rotate(3deg);
+    .sc-img-6 {
+        grid-area: 3 / 1 / 4 / 2;
     }
 
-    .img-3 {
-        width: 29vw;
-        height: 20vw;
-        top: 74vh;
-        left: 1vw;
-        transform: rotate(-4deg);
+    .sc-img-7 {
+        grid-area: 2 / 2 / 3 / 4;
     }
 
-    /* RIGHT COLUMN — 3 small images stacked within viewport */
-    .img-7 {
-        width: 28vw;
-        height: 36vw;
-        top: 5vh;
-        right: 1vw;
-        transform: rotate(3deg);
+    .sc-img-8 {
+        grid-area: 4 / 4 / 6 / 5;
     }
 
-    .img-8 {
-        width: 30vw;
-        height: 20vw;
-        top: 36vh;
-        right: 1.5vw;
-        transform: rotate(-4deg);
+    .sc-img-9 {
+        grid-area: 4 / 1 / 5 / 2;
     }
 
-    .img-9 {
-        width: 27vw;
-        height: 35vw;
-        top: 64vh;
-        right: 1vw;
-        transform: rotate(3.5deg);
+    .sc-img-10 {
+        grid-area: 5 / 1 / 7 / 3;
+    }
+
+    .sc-img-11 {
+        grid-area: 5 / 3 / 6 / 4;
+    }
+
+    .sc-img-12 {
+        grid-area: 6 / 3 / 7 / 4;
+    }
+
+    .sc-img-13 {
+        grid-area: 6 / 4 / 7 / 5;
+    }
+
+    .sc-img-14 {
+        display: none;
+    }
+
+    /* Override varied sizes so they fit robustly on mobile 100vh grids */
+    .gallery-parallax-image {
+        width: 100% !important;
+        height: 100% !important;
+        justify-self: stretch !important;
+        align-self: stretch !important;
     }
 }
 
-/* ══════════════════════════════════════
-   SMALL MOBILE  ≤ 480px
-══════════════════════════════════════ */
+/* SMALL MOBILE */
 @media (max-width: 480px) {
     .gallery-heading {
         font-size: 1.5rem;
@@ -413,94 +426,5 @@
 
     .gallery-heading span {
         font-size: 3rem;
-    }
-
-    .img-1 {
-        width: 36vw;
-        height: 25vw;
-        top: 7vh;
-        left: 0.5vw;
-    }
-
-    .img-2 {
-        width: 34vw;
-        height: 44vw;
-        top: 34vh;
-        left: 1vw;
-    }
-
-    .img-3 {
-        width: 35vw;
-        height: 24vw;
-        top: 74vh;
-        left: 0.5vw;
-    }
-
-    .img-7 {
-        width: 34vw;
-        height: 42vw;
-        top: 6vh;
-        right: 0.5vw;
-    }
-
-    .img-8 {
-        width: 36vw;
-        height: 24vw;
-        top: 36vh;
-        right: 0.5vw;
-    }
-
-    .img-9 {
-        width: 33vw;
-        height: 40vw;
-        top: 66vh;
-        right: 0.5vw;
-    }
-}
-
-/* ══════════════════════════════════════
-   VERY SMALL  ≤ 360px
-══════════════════════════════════════ */
-@media (max-width: 360px) {
-    .gallery-heading {
-        font-size: 1.3rem;
-    }
-
-    .gallery-heading span {
-        font-size: 2.6rem;
-    }
-
-    /* Only show 2 images per side to avoid any overlap */
-    .img-3,
-    .img-9 {
-        display: none;
-    }
-
-    .img-1 {
-        width: 42vw;
-        height: 30vw;
-        top: 10vh;
-        left: 0.5vw;
-    }
-
-    .img-2 {
-        width: 38vw;
-        height: 50vw;
-        top: 42vh;
-        left: 1vw;
-    }
-
-    .img-7 {
-        width: 38vw;
-        height: 48vw;
-        top: 8vh;
-        right: 0.5vw;
-    }
-
-    .img-8 {
-        width: 42vw;
-        height: 28vw;
-        top: 44vh;
-        right: 0.5vw;
     }
 }
