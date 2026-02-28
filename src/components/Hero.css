@@ -6,7 +6,7 @@
     align-items: flex-start;
     justify-content: center;
     position: relative;
-    padding-top: 18vh;
+    padding-top: 14vh;
 }
 
 .hero-container {
@@ -45,15 +45,178 @@
     animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
-.connecting-line-hero {
+
+/* ───────────────────────────────────────
+   Rotating Tagline (Typewriter)
+   ─────────────────────────────────────── */
+
+.hero-tagline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.6rem;
+    font-size: clamp(0.85rem, 1.8vw, 1.05rem);
+    color: #555;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+.hero-tagline-label {
+    opacity: 0.7;
+}
+
+.hero-tagline-separator {
+    opacity: 0.4;
+    margin: 0 0.15rem;
+}
+
+.hero-tagline-word {
+    color: #111;
+    font-weight: 500;
+    font-family: 'SF Mono', 'Fira Code', 'Menlo', monospace;
+    position: relative;
+    min-width: 12ch;
+    text-align: left;
+}
+
+.hero-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: #111;
+    margin-left: 1px;
+    vertical-align: text-bottom;
+    animation: cursorBlink 0.8s steps(1) infinite;
+}
+
+@keyframes cursorBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+
+/* ───────────────────────────────────────
+   Availability Badge
+   ─────────────────────────────────────── */
+
+.hero-availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 2rem;
+    padding: 0.45rem 1.1rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(6px);
+    animation: fadeInUp 0.8s ease-out 0.6s backwards;
+}
+
+.hero-availability-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.hero-availability-dot::after {
+    content: '';
     position: absolute;
-    bottom: 0;
+    top: 50%;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    transform: translate(-50%, -50%);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2.8);
+    }
+}
+
+.hero-availability-text {
+    font-size: 0.8rem;
+    color: #444;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+}
+
+
+/* ───────────────────────────────────────
+   Scroll Indicator
+   ─────────────────────────────────────── */
+
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 1px;
-    height: 150px;
-    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeInUp 0.8s ease-out 0.8s backwards;
 }
+
+.hero-scroll-line {
+    width: 1px;
+    height: 40px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.hero-scroll-line::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: #000;
+    animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+    0% {
+        top: -100%;
+    }
+
+    50% {
+        top: 0%;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+
+/* ───────────────────────────────────────
+   Base Animation
+   ─────────────────────────────────────── */
 
 @keyframes fadeInUp {
     from {
@@ -67,45 +230,59 @@
     }
 }
 
-.hero-social-links {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
-    animation: fadeInUp 0.8s ease-out 0.4s backwards;
-}
 
-.social-icon {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #444;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: transparent;
-    text-decoration: none;
-}
+/* ───────────────────────────────────────
+   Connecting Line (legacy)
+   ─────────────────────────────────────── */
 
-.social-icon:hover {
+.connecting-line-hero {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 150px;
     background-color: #000;
-    color: #fff;
-    border-color: #000;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive adjustments */
+
+/* ───────────────────────────────────────
+   Responsive
+   ─────────────────────────────────────── */
+
 @media (max-width: 768px) {
+    .hero {
+        padding-top: 16vh;
+    }
+
     .hero-container {
         padding: 0 1.5rem;
     }
 
     .hero-intro {
         margin-top: 1rem;
+    }
+
+    .hero-tagline {
+        flex-direction: column;
+        gap: 0.25rem;
+        margin-top: 1.2rem;
+    }
+
+    .hero-tagline-separator {
+        display: none;
+    }
+
+    .hero-tagline-word {
+        min-width: unset;
+        text-align: center;
+    }
+
+    .hero-availability {
+        margin-top: 1.5rem;
+    }
+
+    .hero-scroll-indicator {
+        bottom: 1.2rem;
     }
 }

@@ -1,25 +1,80 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Hero.css';
 
+const FOCUS_AREAS = [
+    'Blockchain',
+    'AI / ML',
+    'Mobile Apps',
+    'Full-Stack Development',
+];
+
 function Hero() {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [displayText, setDisplayText] = useState('');
+    const [isDeleting, setIsDeleting] = useState(false);
+    const timeoutRef = useRef(null);
+
+    useEffect(() => {
+        const currentWord = FOCUS_AREAS[currentIndex];
+
+        const handleTyping = () => {
+            if (!isDeleting) {
+                // Typing forward
+                if (displayText.length < currentWord.length) {
+                    setDisplayText(currentWord.slice(0, displayText.length + 1));
+                    timeoutRef.current = setTimeout(handleTyping, 80 + Math.random() * 40);
+                } else {
+                    // Pause at full word, then start deleting
+                    timeoutRef.current = setTimeout(() => {
+                        setIsDeleting(true);
+                    }, 2200);
+                }
+            } else {
+                // Deleting
+                if (displayText.length > 0) {
+                    setDisplayText(currentWord.slice(0, displayText.length - 1));
+                    timeoutRef.current = setTimeout(handleTyping, 40);
+                } else {
+                    // Move to next word
+                    setIsDeleting(false);
+                    setCurrentIndex((prev) => (prev + 1) % FOCUS_AREAS.length);
+                }
+            }
+        };
+
+        timeoutRef.current = setTimeout(handleTyping, isDeleting ? 40 : 100);
+
+        return () => clearTimeout(timeoutRef.current);
+    }, [displayText, isDeleting, currentIndex]);
+
     return (
         <section className="hero">
             <div className="hero-container">
                 <div className="hero-content">
                     <h1 className="hero-name">Sarvesh<br /><span>Varvatkar</span></h1>
                     <p className="hero-intro">Software Engineer</p>
-                    <div className="hero-social-links">
-                        <a href="https://www.instagram.com/sarvesh._.v9/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Instagram">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        </a>
-                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="GitHub">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        </a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                        </a>
+
+                    {/* Rotating Tagline */}
+                    <div className="hero-tagline">
+                        <span className="hero-tagline-label">Currently exploring</span>
+                        <span className="hero-tagline-separator">—</span>
+                        <span className="hero-tagline-word">
+                            {displayText}
+                            <span className="hero-cursor" />
+                        </span>
+                    </div>
+
+                    {/* Availability Badge */}
+                    <div className="hero-availability">
+                        <span className="hero-availability-dot" />
+                        <span className="hero-availability-text">Available for opportunities</span>
                     </div>
                 </div>
+            </div>
+
+            {/* Scroll Indicator */}
+            <div className="hero-scroll-indicator">
+                <div className="hero-scroll-line" />
             </div>
         </section>
     );
