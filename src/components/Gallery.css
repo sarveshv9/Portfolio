@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
-
 /* ── Gallery Screen ── */
 .gallery-screen {
     position: relative;
@@ -66,7 +64,7 @@
 
 /* ── Typography ── */
 .gallery-eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 0.7rem;
     font-weight: 400;
     letter-spacing: 0.25em;
@@ -76,7 +74,7 @@
 }
 
 .gallery-heading {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 3.2rem;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.9);
@@ -86,7 +84,7 @@
 }
 
 .gallery-heading span {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 6.5rem;
     font-style: italic;
     font-weight: 300;
@@ -106,7 +104,7 @@
 }
 
 .gallery-sub {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 0.78rem;
     color: rgba(255, 255, 255, 0.3);
     letter-spacing: 0.12em;
@@ -121,7 +119,7 @@
     left: 2rem;
     z-index: 20;
     padding: 0.55rem 1.4rem;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 0.8rem;
     font-weight: 400;
     letter-spacing: 0.08em;
