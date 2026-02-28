@@ -32,8 +32,8 @@ function Home() {
 
     return (
         <div ref={containerRef}>
-            <Squares />
             <div className="pinned-section">
+                <Squares />
                 <Header />
                 <Hero />
             </div>
