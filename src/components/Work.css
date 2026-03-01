@@ -1,7 +1,6 @@
 .work-page {
     min-height: 100vh;
     background-color: #F7F7F7;
-    /* Match project's dark theme */
     color: #000000;
     padding: 0 6rem 2rem;
     display: flex;
@@ -71,6 +70,7 @@
     flex-direction: row-reverse;
 }
 
+/* ── Project Image ───────────────────────────────────── */
 .project-image-wrapper {
     flex: 1.2;
     overflow: hidden;
@@ -93,21 +93,70 @@
 .project-image-inner img {
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: cover;
     filter: brightness(0.9);
     transition: filter 0.8s;
 }
 
 .project-image-wrapper:hover .project-image-inner img {
-    filter: brightness(0.5);
+    filter: brightness(0.35);
 }
 
+/* ── Hover overlay (Key Contribution) ───────────────── */
+.project-image-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.project-image-wrapper:hover .project-image-overlay {
+    opacity: 1;
+}
+
+.project-image-overlay .overlay-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.75rem;
+}
+
+.project-image-overlay .overlay-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #fff;
+    text-align: center;
+    max-width: 400px;
+    font-weight: 400;
+}
+
+/* ── Project Info ────────────────────────────────────── */
 .project-info {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 2rem 0;
+}
+
+.project-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.project-meta-row .project-tags {
+    margin-bottom: 0;
 }
 
 .project-tags {
@@ -128,6 +177,56 @@
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     color: #000;
+}
+
+/* ── Status Badge ────────────────────────────────────── */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.3em 0.9em;
+    border: 1px solid;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* ── Tech Icon Strip ─────────────────────────────────── */
+.tech-strip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tech-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.55;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.tech-icon:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.tech-icon svg {
+    width: 100%;
+    height: 100%;
 }
 
 .project-title {
@@ -158,6 +257,7 @@
     padding-bottom: 0.25rem;
     width: max-content;
     transition: border-color 0.3s, gap 0.3s;
+    text-decoration: none;
 }
 
 .project-link:hover {
@@ -165,6 +265,120 @@
     gap: 1rem;
 }
 
+/* ── Sub‑projects (subtle rows) ──────────────────────── */
+.sub-projects-section {
+    width: 100%;
+    max-width: 1400px;
+    margin-top: 6rem;
+}
+
+.sub-projects-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(0, 0, 0, 0.35);
+    margin-bottom: 1.5rem;
+}
+
+.sub-projects-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.sub-project-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    color: #000;
+    transition: padding-left 0.3s ease;
+}
+
+.sub-project-row:last-child {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.sub-project-row:hover {
+    padding-left: 0.5rem;
+}
+
+.sub-row-left {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-width: 0;
+    flex: 1;
+}
+
+.sub-row-thumb {
+    width: 194px;
+    height: 154px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-right: 1rem;
+}
+
+.sub-row-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.sub-project-row:hover .sub-row-thumb img {
+    transform: scale(1.1);
+}
+
+.sub-row-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.sub-row-dash {
+    margin: 0 0.6rem;
+    color: rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+.sub-row-desc {
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.45);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sub-row-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.sub-row-right .tech-strip {
+    margin-bottom: 0;
+}
+
+.sub-row-arrow {
+    color: rgba(0, 0, 0, 0.25);
+    transition: color 0.3s, transform 0.3s;
+    flex-shrink: 0;
+}
+
+.sub-project-row:hover .sub-row-arrow {
+    color: #000;
+    transform: translate(2px, -2px);
+}
+
+/* ── Footer ──────────────────────────────────────────── */
 .work-footer {
     margin-top: 10rem;
     margin-bottom: 4rem;
@@ -217,7 +431,11 @@
     transform: translateX(4px);
 }
 
+/* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 968px) {
+    .work-page {
+        padding: 0 1.5rem 2rem;
+    }
 
     .project-card,
     .project-card.reverse {
@@ -232,5 +450,28 @@
     .work-title {
         flex-direction: column;
         gap: 0;
+    }
+
+    .sub-project-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .sub-row-left {
+        flex-wrap: wrap;
+    }
+
+    .sub-row-desc {
+        white-space: normal;
+    }
+
+    .sub-row-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .sub-projects-section {
+        margin-top: 4rem;
     }
 }

@@ -56,7 +56,7 @@ function Hero() {
 
                     {/* Rotating Tagline */}
                     <div className="hero-tagline">
-                        <span className="hero-tagline-label">Currently exploring</span>
+                        <span className="hero-tagline-label">Passionate about</span>
                         <span className="hero-tagline-separator">—</span>
                         <span className="hero-tagline-word">
                             {displayText}
