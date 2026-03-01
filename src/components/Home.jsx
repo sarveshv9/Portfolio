@@ -8,6 +8,7 @@ import About from './About';
 import Squares from './Squares';
 import ScrollVelocity from './ScrollVelocity';
 import Work from './Work';
+import WorkContactTransition from './WorkContactTransition';
 import Contact from './Contact';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -49,6 +50,7 @@ function Home() {
             </div>
 
             <Work />
+            <WorkContactTransition />
             <Contact />
         </div>
     );

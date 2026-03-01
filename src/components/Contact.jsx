@@ -10,6 +10,21 @@ function Contact() {
 
     useLayoutEffect(() => {
         let ctx = gsap.context(() => {
+            // Clip-path reveal for entire contact section
+            gsap.fromTo(containerRef.current,
+                { clipPath: 'inset(8% 4% 8% 4% round 24px)' },
+                {
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: 'top 90%',
+                        end: 'top 20%',
+                        scrub: true,
+                    },
+                    clipPath: 'inset(0% 0% 0% 0% round 0px)',
+                    ease: 'none',
+                }
+            );
+
             // Staggered reveal for content elements
             const elements = gsap.utils.toArray('.contact-animate');
             gsap.fromTo(elements,

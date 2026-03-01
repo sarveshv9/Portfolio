@@ -1,0 +1,47 @@
+/* ── Work → Contact Transition Zone ── */
+
+.wc-transition {
+    --progress: 0;
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    background: color-mix(
+        in srgb,
+        #F7F7F7 calc((1 - var(--progress)) * 100%),
+        #000
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.wc-transition-inner {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2rem;
+}
+
+.wc-transition-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent
+    );
+    transform-origin: center;
+    transform: scaleX(0);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .wc-transition {
+        height: 25vh;
+    }
+}
