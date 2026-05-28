@@ -89,7 +89,44 @@
     color: rgba(255, 255, 255, 0.5);
     max-width: 500px;
     line-height: 1.6;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.5rem;
+}
+
+/* ── Resume Download Button ── */
+.contact-resume-wrapper {
+    margin-bottom: 3rem;
+}
+
+.contact-resume-btn {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #000;
+    background: #fff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 2.2rem;
+    border-radius: 100px;
+    border: 1px solid #fff;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: 0.02em;
+}
+
+.contact-resume-btn:hover {
+    color: #fff;
+    background: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+}
+
+.contact-resume-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.contact-resume-btn:hover svg {
+    transform: translateY(3px);
 }
 
 /* ── Email Link ── */

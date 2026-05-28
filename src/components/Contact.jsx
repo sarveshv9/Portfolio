@@ -81,8 +81,20 @@ function Contact() {
                 </h2>
 
                 <p className="contact-subtext contact-animate">
-                    Have a project in mind or just want to say hello? Feel free to reach out — I'm always open to new conversations and opportunities.
+                    I'm actively looking for full-time roles where I can build meaningful products. Have an opportunity or just want to say hello? Let's talk.
                 </p>
+
+                {/* Resume Download */}
+                <div className="contact-resume-wrapper contact-animate">
+                    <a href="/resume.pdf" download className="contact-resume-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Download Resume
+                    </a>
+                </div>
 
                 {/* Email */}
                 <div className="contact-email-wrapper contact-animate">

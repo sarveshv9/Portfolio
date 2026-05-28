@@ -11,7 +11,7 @@ function About() {
     const textRef = useRef(null);
 
     // The main statement to reveal on scroll
-    const statement = "I’m Sarvesh Varvatkar, a fourth-year Computer Engineering student who enjoys building thoughtful, simple experiences and exploring new places whenever I’m not creating.";
+    const statement = "I'm Sarvesh Varvatkar, a Software Engineer who enjoys building thoughtful, simple experiences and exploring new places whenever I'm not creating.";
     const words = statement.split(" ");
 
     useLayoutEffect(() => {

@@ -5,7 +5,7 @@ const FOCUS_AREAS = [
     'Blockchain',
     'AI / ML',
     'Mobile Apps',
-    'Full-Stack Development',
+    'Full-Stack Dev',
 ];
 
 function Hero() {
@@ -14,28 +14,29 @@ function Hero() {
     const [isDeleting, setIsDeleting] = useState(false);
     const timeoutRef = useRef(null);
 
+    // Magnetic name refs
+    const nameRef = useRef(null);
+    const targetMag = useRef({ x: 0, y: 0 });
+    const currentMag = useRef({ x: 0, y: 0 });
+    const rafRef = useRef(null);
+
+    // ── Typewriter ────────────────────────────────────────────
     useEffect(() => {
         const currentWord = FOCUS_AREAS[currentIndex];
 
         const handleTyping = () => {
             if (!isDeleting) {
-                // Typing forward
                 if (displayText.length < currentWord.length) {
                     setDisplayText(currentWord.slice(0, displayText.length + 1));
                     timeoutRef.current = setTimeout(handleTyping, 80 + Math.random() * 40);
                 } else {
-                    // Pause at full word, then start deleting
-                    timeoutRef.current = setTimeout(() => {
-                        setIsDeleting(true);
-                    }, 2200);
+                    timeoutRef.current = setTimeout(() => setIsDeleting(true), 2200);
                 }
             } else {
-                // Deleting
                 if (displayText.length > 0) {
                     setDisplayText(currentWord.slice(0, displayText.length - 1));
                     timeoutRef.current = setTimeout(handleTyping, 40);
                 } else {
-                    // Move to next word
                     setIsDeleting(false);
                     setCurrentIndex((prev) => (prev + 1) % FOCUS_AREAS.length);
                 }
@@ -43,15 +44,78 @@ function Hero() {
         };
 
         timeoutRef.current = setTimeout(handleTyping, isDeleting ? 40 : 100);
-
         return () => clearTimeout(timeoutRef.current);
     }, [displayText, isDeleting, currentIndex]);
+
+    // ── Magnetic pull on name ─────────────────────────────────
+    useEffect(() => {
+        const el = nameRef.current;
+        if (!el) return;
+
+        const RADIUS = 220;
+        const STRENGTH = 0.07;
+        const LERP = 0.09;
+
+        const onMouseMove = (e) => {
+            const rect = el.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dx = e.clientX - cx;
+            const dy = e.clientY - cy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < RADIUS) {
+                const pull = 1 - dist / RADIUS;
+                targetMag.current = {
+                    x: dx * STRENGTH * pull,
+                    y: dy * STRENGTH * pull,
+                };
+            } else {
+                targetMag.current = { x: 0, y: 0 };
+            }
+        };
+
+        const onMouseLeave = () => {
+            targetMag.current = { x: 0, y: 0 };
+        };
+
+        const animate = () => {
+            currentMag.current.x += (targetMag.current.x - currentMag.current.x) * LERP;
+            currentMag.current.y += (targetMag.current.y - currentMag.current.y) * LERP;
+
+            const tx = currentMag.current.x;
+            const ty = currentMag.current.y;
+
+            // Only apply if movement is meaningful — avoids jank on idle
+            if (Math.abs(tx) > 0.01 || Math.abs(ty) > 0.01) {
+                el.style.transform = `translate(${tx}px, ${ty}px)`;
+            } else {
+                el.style.transform = 'translate(0px, 0px)';
+            }
+
+            rafRef.current = requestAnimationFrame(animate);
+        };
+
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseleave', onMouseLeave);
+        rafRef.current = requestAnimationFrame(animate);
+
+        return () => {
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('mouseleave', onMouseLeave);
+            cancelAnimationFrame(rafRef.current);
+        };
+    }, []);
 
     return (
         <section className="hero">
             <div className="hero-container">
                 <div className="hero-content">
-                    <h1 className="hero-name">Sarvesh<br /><span>Varvatkar</span></h1>
+
+                    <h1 className="hero-name" ref={nameRef}>
+                        Sarvesh<br /><span>Varvatkar</span>
+                    </h1>
+
                     <p className="hero-intro">Software Engineer</p>
 
                     {/* Rotating Tagline */}
@@ -67,8 +131,9 @@ function Hero() {
                     {/* Availability Badge */}
                     <div className="hero-availability">
                         <span className="hero-availability-dot" />
-                        <span className="hero-availability-text">Available for opportunities</span>
+                        <span className="hero-availability-text">Actively seeking opportunities</span>
                     </div>
+
                 </div>
             </div>
 
