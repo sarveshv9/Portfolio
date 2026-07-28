@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
-
 /* ── Variables ───────────────────────────────────────── */
 :root {
     --bg: #f5f4f0;
@@ -8,8 +6,8 @@
     --text: #1a1a18;
     --muted: rgba(26, 26, 24, 0.45);
     --accent: #1a1a18;
-    --font-display: 'DM Serif Display', Georgia, serif;
-    --font-body: 'DM Sans', sans-serif;
+    --font-display: "Special Gothic Expanded One", cursive;
+    --font-body: 'Outfit', sans-serif;
 }
 
 /* ── Page shell ──────────────────────────────────────── */
