@@ -73,10 +73,6 @@ function Hero() {
                 </div>
             </div>
 
-            {/* Scroll Indicator */}
-            <div className="hero-scroll-indicator">
-                <div className="hero-scroll-line" />
-            </div>
         </section>
     );
 }
