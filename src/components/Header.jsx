@@ -8,10 +8,12 @@ function Header() {
 
             <PillNav
                 items={[
+                    { label: 'Sarvesh Varvatkar', href: '/' },
                     { label: 'About', href: '#about' },
                     { label: 'Work', href: '#work' },
                     { label: 'Contact', href: '#contact' }
                 ]}
+                detachFirstItem={true}
                 activeHref="/"
                 className="custom-nav"
                 ease="power2.easeOut"

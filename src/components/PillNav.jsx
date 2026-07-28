@@ -8,6 +8,7 @@ const PillNav = ({
     logo,
     logoAlt = 'Logo',
     items,
+    detachFirstItem = false,
     activeHref,
     className = '',
     ease = 'power3.easeOut',
@@ -28,6 +29,7 @@ const PillNav = ({
     const hamburgerRef = useRef(null);
     const mobileMenuRef = useRef(null);
     const navItemsRef = useRef(null);
+    const detachedNavItemsRef = useRef(null);
     const logoRef = useRef(null);
     const lenis = useSmoothScroll();
 
@@ -45,7 +47,7 @@ const PillNav = ({
                 const originY = D - delta;
 
                 // Calculate required scale to cover corners plus buffer
-                const distCorner = Math.sqrt((w * w) / 4 + Math.pow(2 * h - R, 2));
+                const distCorner = Math.sqrt((w * w) / 4 + (h * h));
                 const targetScale = (distCorner / R) + 0.1;
 
                 circle.style.width = `${D}px`;
@@ -112,14 +114,19 @@ const PillNav = ({
                 });
             }
 
-            if (navItems) {
-                gsap.set(navItems, { width: 0, overflow: 'hidden' });
-                gsap.to(navItems, {
-                    width: 'auto',
-                    duration: 0.6,
-                    ease
-                });
-            }
+            const animateNavItems = (el) => {
+                if (el) {
+                    gsap.set(el, { width: 0, overflow: 'hidden' });
+                    gsap.to(el, {
+                        width: 'auto',
+                        duration: 0.6,
+                        ease
+                    });
+                }
+            };
+
+            animateNavItems(navItemsRef.current);
+            animateNavItems(detachedNavItemsRef.current);
         }
 
         return () => window.removeEventListener('resize', onResize);
@@ -274,10 +281,75 @@ const PillNav = ({
                     )
                 )}
 
+                {detachFirstItem && items.length > 0 && (
+                    <div className="pill-nav-items desktop-only" ref={detachedNavItemsRef} style={{ marginRight: '8px' }}>
+                        <ul className="pill-list" role="menubar">
+                            {(() => {
+                                const item = items[0];
+                                const i = 0;
+                                return (
+                                    <li key={item.href || `item-${i}`} role="none">
+                                        {isRouterLink(item.href) ? (
+                                            <Link
+                                                role="menuitem"
+                                                to={item.href}
+                                                className="pill"
+                                                aria-label={item.ariaLabel || item.label}
+                                                onMouseEnter={() => handleEnter(i)}
+                                                onMouseLeave={() => handleLeave(i)}
+                                            >
+                                                <span
+                                                    className="hover-circle"
+                                                    aria-hidden="true"
+                                                    ref={el => {
+                                                        circleRefs.current[i] = el;
+                                                    }}
+                                                />
+                                                <span className="label-stack">
+                                                    <span className="pill-label">{item.label}</span>
+                                                    <span className="pill-label-hover" aria-hidden="true">
+                                                        {item.label}
+                                                    </span>
+                                                </span>
+                                            </Link>
+                                        ) : (
+                                            <a
+                                                role="menuitem"
+                                                href={item.href}
+                                                className="pill"
+                                                aria-label={item.ariaLabel || item.label}
+                                                onMouseEnter={() => handleEnter(i)}
+                                                onMouseLeave={() => handleLeave(i)}
+                                                onClick={(e) => handleLinkClick(e, item.href)}
+                                            >
+                                                <span
+                                                    className="hover-circle"
+                                                    aria-hidden="true"
+                                                    ref={el => {
+                                                        circleRefs.current[i] = el;
+                                                    }}
+                                                />
+                                                <span className="label-stack">
+                                                    <span className="pill-label">{item.label}</span>
+                                                    <span className="pill-label-hover" aria-hidden="true">
+                                                        {item.label}
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        )}
+                                    </li>
+                                );
+                            })()}
+                        </ul>
+                    </div>
+                )}
+
                 <div className="pill-nav-items desktop-only" ref={navItemsRef}>
                     <ul className="pill-list" role="menubar">
-                        {items.map((item, i) => (
-                            <li key={item.href || `item-${i}`} role="none">
+                        {(detachFirstItem ? items.slice(1) : items).map((item, index) => {
+                            const i = detachFirstItem ? index + 1 : index;
+                            return (
+                                <li key={item.href || `item-${i}`} role="none">
                                 {isRouterLink(item.href) ? (
                                     <Link
                                         role="menuitem"
@@ -326,8 +398,9 @@ const PillNav = ({
                                         </span>
                                     </a>
                                 )}
-                            </li>
-                        ))}
+                                </li>
+                            );
+                        })}
                     </ul>
                 </div>
 

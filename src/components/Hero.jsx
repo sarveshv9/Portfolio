@@ -14,12 +14,6 @@ function Hero() {
     const [isDeleting, setIsDeleting] = useState(false);
     const timeoutRef = useRef(null);
 
-    // Magnetic name refs
-    const nameRef = useRef(null);
-    const targetMag = useRef({ x: 0, y: 0 });
-    const currentMag = useRef({ x: 0, y: 0 });
-    const rafRef = useRef(null);
-
     // ── Typewriter ────────────────────────────────────────────
     useEffect(() => {
         const currentWord = FOCUS_AREAS[currentIndex];
@@ -47,73 +41,15 @@ function Hero() {
         return () => clearTimeout(timeoutRef.current);
     }, [displayText, isDeleting, currentIndex]);
 
-    // ── Magnetic pull on name ─────────────────────────────────
-    useEffect(() => {
-        const el = nameRef.current;
-        if (!el) return;
 
-        const RADIUS = 220;
-        const STRENGTH = 0.07;
-        const LERP = 0.09;
-
-        const onMouseMove = (e) => {
-            const rect = el.getBoundingClientRect();
-            const cx = rect.left + rect.width / 2;
-            const cy = rect.top + rect.height / 2;
-            const dx = e.clientX - cx;
-            const dy = e.clientY - cy;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist < RADIUS) {
-                const pull = 1 - dist / RADIUS;
-                targetMag.current = {
-                    x: dx * STRENGTH * pull,
-                    y: dy * STRENGTH * pull,
-                };
-            } else {
-                targetMag.current = { x: 0, y: 0 };
-            }
-        };
-
-        const onMouseLeave = () => {
-            targetMag.current = { x: 0, y: 0 };
-        };
-
-        const animate = () => {
-            currentMag.current.x += (targetMag.current.x - currentMag.current.x) * LERP;
-            currentMag.current.y += (targetMag.current.y - currentMag.current.y) * LERP;
-
-            const tx = currentMag.current.x;
-            const ty = currentMag.current.y;
-
-            // Only apply if movement is meaningful — avoids jank on idle
-            if (Math.abs(tx) > 0.01 || Math.abs(ty) > 0.01) {
-                el.style.transform = `translate(${tx}px, ${ty}px)`;
-            } else {
-                el.style.transform = 'translate(0px, 0px)';
-            }
-
-            rafRef.current = requestAnimationFrame(animate);
-        };
-
-        window.addEventListener('mousemove', onMouseMove);
-        window.addEventListener('mouseleave', onMouseLeave);
-        rafRef.current = requestAnimationFrame(animate);
-
-        return () => {
-            window.removeEventListener('mousemove', onMouseMove);
-            window.removeEventListener('mouseleave', onMouseLeave);
-            cancelAnimationFrame(rafRef.current);
-        };
-    }, []);
 
     return (
         <section className="hero">
             <div className="hero-container">
                 <div className="hero-content">
 
-                    <h1 className="hero-name" ref={nameRef}>
-                        Sarvesh<br /><span>Varvatkar</span>
+                    <h1 className="hero-name">
+                        Building<br /><span>digital futures</span>
                     </h1>
 
                     <p className="hero-intro">Software Engineer</p>

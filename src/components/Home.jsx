@@ -5,7 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from './Header';
 import Hero from './Hero';
 import About from './About';
-import Squares from './Squares';
 import ScrollVelocity from './ScrollVelocity';
 import Work from './Work';
 import Contact from './Contact';
@@ -33,7 +32,6 @@ function Home() {
     return (
         <div ref={containerRef}>
             <div className="pinned-section">
-                <Squares />
                 <Header />
                 <Hero />
             </div>

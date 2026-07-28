@@ -28,10 +28,10 @@
     font-family: "Special Gothic Expanded One", cursive;
     font-weight: 900;
     font-style: normal;
-    font-size: clamp(5rem, 15vw, 10rem);
+    font-size: clamp(3rem, 10vw, 8rem);
     margin: 0;
     color: #000;
-    line-height: 0.6;
+    line-height: 0.9;
     animation: fadeInUp 0.8s ease-out;
     /* Magnetic effect — transform applied via JS */
     will-change: transform;
@@ -40,7 +40,7 @@
 }
 
 .hero-name span {
-    font-size: clamp(4.1rem, 15vw, 8.2rem);
+    font-size: clamp(2.5rem, 8vw, 6rem);
 }
 
 /* ───────────────────────────────────────
