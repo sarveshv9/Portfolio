@@ -2,7 +2,6 @@ import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import Header from './Header';
 import Hero from './Hero';
 import About from './About';
 import ScrollVelocity from './ScrollVelocity';
@@ -32,7 +31,6 @@ function Home() {
     return (
         <div ref={containerRef}>
             <div className="pinned-section">
-                <Header />
                 <Hero />
             </div>
             <About />
