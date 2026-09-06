@@ -40,18 +40,6 @@ function Hero() {
                 </div>
             </div>
 
-            {/* Bottom Section */}
-            <div className="hero-bottom-curve">
-                <div className="hero-bottom-content">
-                    <div className="hero-scroll-wrapper">
-                        <div className="hero-scroll-mouse">
-                            <div className="hero-scroll-wheel"></div>
-                        </div>
-                        <span className="hero-scroll-text">SCROLL TO EXPLORE</span>
-                    </div>
-                </div>
-            </div>
-
         </section>
     );
 }

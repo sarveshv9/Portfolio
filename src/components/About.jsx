@@ -70,6 +70,18 @@ function About() {
 
     return (
         <section id="about" className="about-wrapper" ref={containerRef}>
+            {/* Top Curve Overlapping Content */}
+            <div className="about-top-curve">
+                <div className="about-top-content">
+                    <div className="hero-scroll-wrapper">
+                        <div className="hero-scroll-mouse">
+                            <div className="hero-scroll-wheel"></div>
+                        </div>
+                        <span className="hero-scroll-text">SCROLL TO EXPLORE</span>
+                    </div>
+                </div>
+            </div>
+
             <div className="about-sticky">
 
                 {/* Infinite Background Marquee */}
