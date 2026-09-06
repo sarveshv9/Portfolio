@@ -36,8 +36,11 @@
     display: flex;
     align-items: center;
     height: var(--nav-h);
-    background: var(--base, #000);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 9999px;
+    padding: 0 4px;
 }
 
 .pill-logo {
@@ -134,17 +137,17 @@
     will-change: transform, opacity;
 }
 
-.pill.is-active::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 12px;
-    height: 12px;
+.pill.is-active {
     background: var(--base, #000);
-    border-radius: 50px;
-    z-index: 4;
+    color: var(--hover-text, #fff);
+}
+
+.pill.is-active .pill-label {
+    color: var(--hover-text, #fff);
+}
+
+.pill.is-active::after {
+    display: none;
 }
 
 .desktop-only {

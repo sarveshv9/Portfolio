@@ -8,7 +8,13 @@ function Header() {
 
             <PillNav
                 items={[
-                    { label: 'Sarvesh Varvatkar', href: '/' },
+                    { label: (
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{ width: '8px', height: '8px', backgroundColor: '#00e573', borderRadius: '50%', flexShrink: 0 }}></span>
+                            SARVESH VARVATKAR
+                        </span>
+                    ), ariaLabel: 'Sarvesh Varvatkar', href: '/' },
+                    { label: 'Home', href: '/' },
                     { label: 'About', href: '#about' },
                     { label: 'Work', href: '#work' },
                     { label: 'Contact', href: '#contact' }
