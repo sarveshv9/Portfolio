@@ -14,14 +14,9 @@ function Hero() {
             <div className="hero-container">
                 <div className="hero-content">
 
-                    {/* Availability Badge */}
-                    <div className="hero-availability">
-                        <span className="hero-availability-dot" />
-                        <span className="hero-availability-text">Actively seeking opportunities</span>
-                    </div>
-
                     <h1 className="hero-name">
-                        Building<br /><span>digital futures</span>
+                        <span className="color-green">Ideas</span> go in.<br />
+                        <span className="color-yellow">Web apps</span> come out.
                     </h1>
 
                     <p className="hero-intro">Software Engineer</p>
