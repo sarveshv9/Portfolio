@@ -10,7 +10,7 @@ const FOCUS_AREAS = [
 
 function Hero() {
     return (
-        <section className="hero">
+        <section id="hero" className="hero">
             <div className="hero-container">
                 <div className="hero-content">
 

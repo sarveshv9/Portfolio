@@ -41,23 +41,18 @@ const PillNav = ({
                 const pill = circle.parentElement;
                 const rect = pill.getBoundingClientRect();
                 const { width: w, height: h } = rect;
-                const R = ((w * w) / 4 + h * h) / (2 * h);
-                const D = Math.ceil(2 * R) + 2;
-                const delta = Math.ceil(R - Math.sqrt(Math.max(0, R * R - (w * w) / 4))) + 1;
-                const originY = D - delta;
-
-                // Calculate required scale to cover corners plus buffer
-                const distCorner = Math.sqrt((w * w) / 4 + (h * h));
-                const targetScale = (distCorner / R) + 0.1;
+                
+                const distCorner = Math.sqrt((w * w) / 4 + h * h);
+                const D = Math.ceil(distCorner * 2.8); // generous buffer
 
                 circle.style.width = `${D}px`;
                 circle.style.height = `${D}px`;
-                circle.style.bottom = `-${delta}px`;
+                circle.style.bottom = `-${D / 2}px`;
 
                 gsap.set(circle, {
                     xPercent: -50,
                     scale: 0,
-                    transformOrigin: `50% ${originY}px`
+                    transformOrigin: `50% 50%`
                 });
 
                 const label = pill.querySelector('.pill-label');
@@ -72,7 +67,7 @@ const PillNav = ({
                 tlRefs.current[index]?.kill();
                 const tl = gsap.timeline({ paused: true });
 
-                tl.to(circle, { scale: targetScale, xPercent: -50, duration: 2, ease, overwrite: 'auto' }, 0);
+                tl.to(circle, { scale: 1, xPercent: -50, duration: 2, ease, overwrite: 'auto' }, 0);
 
                 if (label) {
                     tl.to(label, { y: -(h + 8), duration: 2, ease, overwrite: 'auto' }, 0);
@@ -293,7 +288,7 @@ const PillNav = ({
                                             <Link
                                                 role="menuitem"
                                                 to={item.href}
-                                                className="pill"
+                                                className={`pill${activeHref === item.href ? ' is-active' : ''}`}
                                                 aria-label={item.ariaLabel || item.label}
                                                 onMouseEnter={() => handleEnter(i)}
                                                 onMouseLeave={() => handleLeave(i)}
@@ -316,7 +311,7 @@ const PillNav = ({
                                             <a
                                                 role="menuitem"
                                                 href={item.href}
-                                                className="pill"
+                                                className={`pill${activeHref === item.href ? ' is-active' : ''}`}
                                                 aria-label={item.ariaLabel || item.label}
                                                 onMouseEnter={() => handleEnter(i)}
                                                 onMouseLeave={() => handleLeave(i)}
