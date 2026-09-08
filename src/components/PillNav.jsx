@@ -292,6 +292,7 @@ const PillNav = ({
                                                 aria-label={item.ariaLabel || item.label}
                                                 onMouseEnter={() => handleEnter(i)}
                                                 onMouseLeave={() => handleLeave(i)}
+                                                onClick={item.onClick}
                                             >
                                                 <span
                                                     className="hover-circle"
@@ -353,6 +354,7 @@ const PillNav = ({
                                         aria-label={item.ariaLabel || item.label}
                                         onMouseEnter={() => handleEnter(i)}
                                         onMouseLeave={() => handleLeave(i)}
+                                        onClick={item.onClick}
                                     >
                                         <span
                                             className="hover-circle"
@@ -418,7 +420,10 @@ const PillNav = ({
                                 <Link
                                     to={item.href}
                                     className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
-                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    onClick={(e) => {
+                                        setIsMobileMenuOpen(false);
+                                        if (item.onClick) item.onClick(e);
+                                    }}
                                 >
                                     {item.label}
                                 </Link>

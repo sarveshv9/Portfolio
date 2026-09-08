@@ -10,7 +10,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 6rem 2rem;
+    padding: 12rem 2rem 4rem; /* Increased top padding to move everything down */
     z-index: 10;
     overflow: hidden;
 }
@@ -238,6 +238,41 @@
 
 .contact-footer-text a:hover {
     color: #fff;
+}
+
+/* ── Back to Top Button ── */
+.contact-back-to-top {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    color: #fff;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    padding: 0.5rem 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    outline: none;
+}
+
+.contact-back-to-top:hover {
+    color: #000;
+    background: #fff;
+    border-color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+}
+
+.contact-back-to-top svg {
+    transition: transform 0.3s ease;
+}
+
+.contact-back-to-top:hover svg {
+    transform: translateY(-3px);
 }
 
 /* ── Responsive ── */

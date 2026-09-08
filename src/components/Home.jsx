@@ -36,7 +36,7 @@ function Home() {
             <About />
 
             {/* Transition Section */}
-            <div className="transition-cross-section">
+            <div className="transition-cross-section" id="work-transition">
                 <ScrollVelocity
                     texts={['Selected Works', 'Featured Projects']}
                     velocity={100}
