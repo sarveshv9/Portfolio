@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { HandwritingText } from "@/components/ui/handwriting-text";
 import './Hero.css';
 
 const FOCUS_AREAS = [
@@ -15,8 +16,23 @@ function Hero() {
                 <div className="hero-content">
 
                     <h1 className="hero-name">
-                        <span className="color-green">Ideas</span> go in.<br />
-                        <span className="color-yellow">Web apps</span> come out.
+                        <span className="color-green" style={{ display: 'inline-block', transform: 'translateY(0.15em)' }}>
+                            <HandwritingText
+                              text="Ideas"
+                              height="1.15em"
+                              delay={1.0}
+                            />
+                        </span>
+                        {" go in."}
+                        <br />
+                        <span className="color-yellow" style={{ display: 'inline-block', transform: 'translateY(0.15em)' }}>
+                            <HandwritingText
+                              text="Web apps"
+                              height="1.15em"
+                              delay={1.5}
+                            />
+                        </span>
+                        {" come out."}
                     </h1>
 
                     <p className="hero-intro">Software Engineer</p>
