@@ -11,7 +11,7 @@ function Gallery() {
             <div className="gallery-scatter-grid">
                 {images.map(({ cls, src, alt }, index) => (
                     <div key={index} className={`gallery-parallax-image ${cls}`}>
-                        <img src={src} alt={alt} loading="lazy" decoding="async" />
+                        <img src={src} alt={alt} />
                     </div>
                 ))}
 
