@@ -84,10 +84,6 @@ function Gallery() {
                         <span>Me</span>
                     </h2>
                     <div className="gallery-rule" />
-                    <div className="gallery-click-cue">
-                        <span className="cue-dot" aria-hidden="true" />
-                        <span>Click any photo to expand</span>
-                    </div>
                 </div>
             </div>
 
