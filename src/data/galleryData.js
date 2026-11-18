@@ -8,6 +8,10 @@ import img7 from '../assets/images/img7.JPG';
 import img8 from '../assets/images/img8.JPG';
 import img9 from '../assets/images/img9.JPG';
 import img10 from '../assets/images/img10.JPG';
+import img11 from '../assets/images/img11.JPG';
+import img12 from '../assets/images/img12.JPG';
+import img13 from '../assets/images/img13.JPG';
+import img14 from '../assets/images/img14.JPG';
 
 export const images = [
     { cls: 'sc-img-1', src: img1, alt: "Sarvesh - Snapshot 1" },
@@ -20,8 +24,8 @@ export const images = [
     { cls: 'sc-img-8', src: img8, alt: "Sarvesh - Snapshot 8" },
     { cls: 'sc-img-9', src: img9, alt: "Sarvesh - Snapshot 9" },
     { cls: 'sc-img-10', src: img10, alt: "Sarvesh - Snapshot 10" },
-    { cls: 'sc-img-11', src: img1, alt: "Sarvesh - Snapshot 11" },
-    { cls: 'sc-img-12', src: img6, alt: "Sarvesh - Snapshot 12" },
-    { cls: 'sc-img-13', src: img2, alt: "Sarvesh - Snapshot 13" },
-    { cls: 'sc-img-14', src: img5, alt: "Sarvesh - Snapshot 14" },
+    { cls: 'sc-img-11', src: img11, alt: "Sarvesh - Snapshot 11" },
+    { cls: 'sc-img-12', src: img12, alt: "Sarvesh - Snapshot 12" },
+    { cls: 'sc-img-13', src: img13, alt: "Sarvesh - Snapshot 13" },
+    { cls: 'sc-img-14', src: img14, alt: "Sarvesh - Snapshot 14" },
 ];
