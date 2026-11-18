@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import Header from './components/Header';
 import Home from './components/Home';
-import Gallery from './components/Gallery';
 import LoadingScreen from './components/LoadingScreen';
+
+const Gallery = lazy(() => import('./components/Gallery'));
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -14,10 +15,12 @@ function App() {
     <>
       {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/gallery" element={<Gallery />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/gallery" element={<Gallery />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }
