@@ -64,12 +64,24 @@ function Header() {
             setActiveHref(currentActive);
         };
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
+        let ticking = false;
+
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    handleScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
         // Run once on mount to set initial state
         handleScroll();
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', onScroll);
         };
     }, [location]);
 
