@@ -13,9 +13,9 @@ function App() {
   return (
     <>
       {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
-      <Header />
+      <Header isVisible={!loading} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home isLoaded={!loading} />} />
         <Route path="/gallery" element={<Gallery />} />
       </Routes>
     </>

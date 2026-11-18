@@ -10,7 +10,7 @@ import Contact from './Contact';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Home() {
+function Home({ isLoaded = true }) {
     const containerRef = useRef(null);
 
     useLayoutEffect(() => {
@@ -31,7 +31,7 @@ function Home() {
     return (
         <div ref={containerRef}>
             <div className="pinned-section">
-                <Hero />
+                <Hero isLoaded={isLoaded} />
             </div>
             <About />
 

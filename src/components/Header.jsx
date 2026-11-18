@@ -8,7 +8,7 @@ import PillNav from './PillNav';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Header() {
+function Header({ isVisible = true }) {
     const [activeHref, setActiveHref] = useState('/');
     const location = useLocation();
     const lenis = useSmoothScroll();
@@ -96,7 +96,7 @@ function Header() {
         }
     };
 
-    if (location.pathname !== '/') return null;
+    if (location.pathname !== '/' || !isVisible) return null;
 
     return (
         <header className="header">

@@ -60,7 +60,8 @@
     font-family: 'Outfit', sans-serif;
     font-size: clamp(3.5rem, 8vw, 6.5rem);
     font-weight: 800;
-    line-height: 1.05;
+    line-height: 1.15;
+    min-height: 2.3em;
     color: #f5f4f0;
     margin: 0;
     letter-spacing: -0.03em;
@@ -73,9 +74,10 @@
     font-weight: inherit;
 }
 
+.color-blue,
 .color-green {
-    color: #4ade80;
-    text-shadow: 0 0 24px rgba(74, 222, 128, 0.35);
+    color: #38bdf8;
+    text-shadow: 0 0 28px rgba(56, 189, 248, 0.45);
 }
 
 .color-yellow {

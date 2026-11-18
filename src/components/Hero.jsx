@@ -3,7 +3,7 @@ import { HandwritingText } from "@/components/ui/handwriting-text";
 import TopographicGrid from './TopographicGrid';
 import './Hero.css';
 
-function Hero() {
+function Hero({ isLoaded = true }) {
     return (
         <section id="hero" className="hero">
             <TopographicGrid />
@@ -11,23 +11,27 @@ function Hero() {
                 <div className="hero-content">
 
                     <h1 className="hero-name">
-                        <span className="color-green" style={{ display: 'inline-block', transform: 'translateY(0.15em)' }}>
+                        <span className="color-blue" style={{ display: 'inline-block', transform: 'translateY(0.15em)' }}>
                             <HandwritingText
-                              text="Ideas"
+                              text="Sarvesh"
                               height="1.15em"
-                              delay={1.0}
+                              delay={0.2}
+                              fontUrl="/GloriaHallelujah.ttf"
+                              strokeWidth={2.0}
+                              trigger={isLoaded}
                             />
                         </span>
-                        {" go in."}
                         <br />
                         <span className="color-yellow" style={{ display: 'inline-block', transform: 'translateY(0.15em)' }}>
                             <HandwritingText
-                              text="Web apps"
+                              text="Varvatkar"
                               height="1.15em"
-                              delay={1.5}
+                              delay={0.9}
+                              fontUrl="/GloriaHallelujah.ttf"
+                              strokeWidth={2.0}
+                              trigger={isLoaded}
                             />
                         </span>
-                        {" come out."}
                     </h1>
 
                     <p className="hero-intro">Software Engineer</p>

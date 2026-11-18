@@ -94,6 +94,7 @@ export function HandwritingText({
   fill = true,
   height = "1.15em",
   className,
+  trigger = true,
 }) {
   const cycle = Boolean(words && words.length > 0);
   const [index, setIndex] = useState(0);
@@ -142,6 +143,10 @@ export function HandwritingText({
         .slice(0, geom.contours.length)
         .map((el) => (el ? el.getTotalLength() : 0)),
     );
+    if (!trigger) {
+      setDrawn(false);
+      return undefined;
+    }
     setDrawn(false);
     // Two frames: the first commits the full-length offsets with no transition, the
     // second enables it and moves to zero. Both in one commit leaves nothing to animate.
@@ -149,7 +154,7 @@ export function HandwritingText({
       requestAnimationFrame(() => setDrawn(true)),
     );
     return () => cancelAnimationFrame(id);
-  }, [geom]);
+  }, [geom, trigger]);
 
   // Before the font resolves — and if it never does — the text is still readable.
   if (!geom) {
