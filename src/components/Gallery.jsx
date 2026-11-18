@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Gallery.css';
 import { images } from '../data/galleryData';
 
 function Gallery() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <section id="gallery" className="gallery-screen">
             <Link to="/" className="back-btn">← Home</Link>
@@ -11,7 +15,7 @@ function Gallery() {
             <div className="gallery-scatter-grid">
                 {images.map(({ cls, src, alt }, index) => (
                     <div key={index} className={`gallery-parallax-image ${cls}`}>
-                        <img src={src} alt={alt} />
+                        <img src={src} alt={alt} decoding="async" />
                     </div>
                 ))}
 
