@@ -40,6 +40,14 @@ function Hero() {
                         Passionate about turning ideas into real-world impact
                     </p>
 
+                    <div className="hero-focus-chips" aria-label="Core focus areas">
+                        {FOCUS_AREAS.map((area) => (
+                            <span key={area} className="focus-chip">
+                                {area}
+                            </span>
+                        ))}
+                    </div>
+
                     <div className="hero-actions">
                         <a href="#work" className="btn-primary">
                             View My Work <span>→</span>

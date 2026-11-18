@@ -123,6 +123,10 @@ function Work() {
                                 <h2 className="panel-title">{p.title}</h2>
                                 <TechStrip icons={p.techIcons} />
                                 <p className="panel-desc">{p.description}</p>
+                                <div className="panel-contribution-inline">
+                                    <span className="contribution-eyebrow">Key Contribution</span>
+                                    <p className="contribution-text">{p.contribution}</p>
+                                </div>
                                 <a href={p.link} className="panel-link" target="_blank" rel="noopener noreferrer">
                                     View on GitHub
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none">

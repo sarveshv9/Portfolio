@@ -117,6 +117,35 @@
     animation: fadeInUp 0.8s ease-out 0.4s backwards;
 }
 
+.hero-focus-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    margin-bottom: 0.25rem;
+    animation: fadeInUp 0.8s ease-out 0.45s backwards;
+}
+
+.focus-chip {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #444;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+}
+
+.focus-chip:hover {
+    background: rgba(0, 0, 0, 0.08);
+    color: #111;
+    border-color: rgba(0, 0, 0, 0.18);
+    transform: translateY(-1px);
+}
+
 .hero-actions {
     display: flex;
     align-items: center;
