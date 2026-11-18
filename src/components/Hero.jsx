@@ -1,10 +1,12 @@
 import React from 'react';
 import { HandwritingText } from "@/components/ui/handwriting-text";
+import TopographicGrid from './TopographicGrid';
 import './Hero.css';
 
 function Hero() {
     return (
         <section id="hero" className="hero">
+            <TopographicGrid />
             <div className="hero-container">
                 <div className="hero-content">
 
