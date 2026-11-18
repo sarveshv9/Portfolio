@@ -2,13 +2,6 @@ import React from 'react';
 import { HandwritingText } from "@/components/ui/handwriting-text";
 import './Hero.css';
 
-const FOCUS_AREAS = [
-    'Blockchain',
-    'AI / ML',
-    'Mobile Apps',
-    'Full-Stack Dev',
-];
-
 function Hero() {
     return (
         <section id="hero" className="hero">
@@ -36,17 +29,6 @@ function Hero() {
                     </h1>
 
                     <p className="hero-intro">Software Engineer</p>
-                    <p className="hero-tagline-static">
-                        Passionate about turning ideas into real-world impact
-                    </p>
-
-                    <div className="hero-focus-chips" aria-label="Core focus areas">
-                        {FOCUS_AREAS.map((area) => (
-                            <span key={area} className="focus-chip">
-                                {area}
-                            </span>
-                        ))}
-                    </div>
 
                     <div className="hero-actions">
                         <a href="#work" className="btn-primary">
