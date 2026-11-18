@@ -46,13 +46,11 @@
 /* ── Container for grid ── */
 .gallery-scatter-grid {
     position: absolute;
-    inset: 4vh 4vw;
-    /* maintain spacing from viewport edges */
+    inset: 3.5vh 3.5vw;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    gap: 1.5rem;
-    /* Base gap ensures they never touch */
+    gap: 1.15rem;
     z-index: 1;
 }
 
@@ -66,9 +64,9 @@
     z-index: 10;
     pointer-events: none;
     text-align: center;
-    gap: 1.2rem;
-    padding: 2rem;
-    background: radial-gradient(circle, rgba(8, 8, 8, 0.7) 0%, rgba(8, 8, 8, 0) 70%);
+    gap: 0.9rem;
+    padding: 1.2rem;
+    background: radial-gradient(circle, rgba(8, 8, 8, 0.82) 0%, rgba(8, 8, 8, 0) 75%);
     /* subtle blur behind text */
     animation: galleryContentFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
 }
@@ -255,15 +253,15 @@
 /* ── Image Scatter Cards ── */
 .gallery-parallax-image {
     position: relative;
-    border-radius: 6px;
+    border-radius: 8px;
     background-color: #0b0b0e;
     border: 1px solid rgba(255, 255, 255, 0.08);
     cursor: pointer;
     overflow: hidden;
-    transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
-        box-shadow 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
-        border-color 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
-        z-index 0s 0.38s;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+        z-index 0s 0.35s;
     z-index: 1;
     animation: galleryPhotoFadeIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -290,13 +288,13 @@
 
 /* ── Hover: Reveal the Whole Picture Uncropped with Glow and Expand Cue ── */
 .gallery-parallax-image:hover {
-    transform: scale(1.3);
-    box-shadow: 0 25px 65px rgba(0, 0, 0, 0.96), 0 0 35px rgba(255, 255, 255, 0.18);
-    border-color: rgba(255, 255, 255, 0.38);
+    transform: scale(1.18);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.96), 0 0 35px rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.42);
     z-index: 100;
-    transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
-        box-shadow 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
-        border-color 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
         z-index 0s;
 }
 
@@ -463,115 +461,86 @@
 
 .sc-img-1 {
     grid-area: 1 / 1 / 2 / 3;
-    aspect-ratio: 4 / 3;
-    height: 85%;
-    justify-self: center;
-    align-self: center;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-2 {
     grid-area: 2 / 1 / 4 / 2;
-    aspect-ratio: 3 / 4;
-    height: 88%;
-    justify-self: center;
-    align-self: center;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-3 {
     grid-area: 1 / 3 / 2 / 5;
-    aspect-ratio: 16 / 10;
-    height: 82%;
-    width: 94%;
-    justify-self: center;
-    align-self: start;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-4 {
-    grid-area: 1 / 5 / 3 / 6;
-    aspect-ratio: 9 / 16;
-    height: 90%;
-    justify-self: center;
-    align-self: center;
+    grid-area: 2 / 5 / 4 / 6;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-5 {
-    grid-area: 1 / 6 / 2 / 7;
-    aspect-ratio: 4 / 3;
-    height: 85%;
-    justify-self: center;
-    align-self: center;
+    grid-area: 1 / 5 / 2 / 7;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-6 {
     grid-area: 2 / 2 / 4 / 3;
-    aspect-ratio: 3 / 4;
-    height: 88%;
-    align-self: center;
-    justify-self: center;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-7 {
     grid-area: 4 / 1 / 5 / 3;
-    aspect-ratio: 4 / 3;
-    height: 85%;
-    justify-self: center;
-    align-self: center;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-8 {
-    grid-area: 3 / 5 / 5 / 6;
-    aspect-ratio: 3 / 4;
-    height: 90%;
-    justify-self: center;
-    align-self: center;
+    grid-area: 4 / 5 / 6 / 6;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-9 {
     grid-area: 2 / 6 / 4 / 7;
-    aspect-ratio: 3 / 4;
-    height: 88%;
-    justify-self: center;
-    align-self: center;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-10 {
-    grid-area: 5 / 1 / 6 / 3;
-    aspect-ratio: 4 / 3;
-    height: 85%;
-    justify-self: center;
-    align-self: center;
+    grid-area: 5 / 1 / 6 / 2;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-11 {
     grid-area: 5 / 3 / 6 / 4;
-    aspect-ratio: 4 / 3;
-    height: 85%;
-    justify-self: center;
-    align-self: center;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-12 {
     grid-area: 4 / 6 / 6 / 7;
-    aspect-ratio: 9 / 16;
-    height: 92%;
-    justify-self: center;
-    align-self: center;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-13 {
     grid-area: 5 / 4 / 6 / 5;
-    aspect-ratio: 3 / 4;
-    height: 88%;
-    justify-self: center;
-    align-self: center;
+    width: 100%;
+    height: 100%;
 }
 
 .sc-img-14 {
-    grid-area: 5 / 5 / 6 / 6;
-    aspect-ratio: 2 / 3;
-    height: 88%;
-    justify-self: center;
-    align-self: center;
+    grid-area: 5 / 2 / 6 / 3;
+    width: 100%;
+    height: 100%;
 }
 
 /* ══════════════════════════════════════
