@@ -115,7 +115,6 @@ function Header() {
                     },
                     { label: 'About', href: '#about' },
                     { label: 'Work', href: '#work' },
-                    { label: 'Gallery', href: '/gallery' },
                     { label: 'Contact', href: '#contact' }
                 ]}
                 detachFirstItem={true}
