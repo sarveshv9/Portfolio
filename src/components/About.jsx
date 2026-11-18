@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
+import { images } from '../data/galleryData';
 import './About.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -44,24 +45,24 @@ function About() {
                     color: '#fff',
                     stagger: 0.1,
                     ease: 'none',
-                    duration: 1 // take up 1 second of relative timeline time
+                    duration: 1
                 }
             );
 
-            // Fade in the button
+            // Clean, smooth reveal of the button as text finishes
             tl.fromTo('.about-cta',
-                { opacity: 0, y: 20 },
+                { opacity: 0, y: 25 },
                 {
                     opacity: 1,
                     y: 0,
                     ease: 'power2.out',
-                    duration: 0.3 // fade in quickly
+                    duration: 0.5
                 },
-                "-=0.1" // start slightly before text finishes
+                1.6
             );
 
-            // Add empty space to the timeline so it stays pinned longer
-            tl.to({}, { duration: 1 });
+            // Generous hold time so the finished text and button stay pinned comfortably
+            tl.to({}, { duration: 2.5 });
 
         }, containerRef);
 
@@ -102,11 +103,20 @@ function About() {
                     </h2>
 
                     <div className="about-cta">
-                        <Link to="/gallery" className="gallery-btn">
-                            <span>Know me more</span>
+                        <Link to="/gallery" viewTransition className="gallery-btn" aria-label="Know me more">
+                            <div className="btn-avatar-stack" aria-hidden="true">
+                                <img src={images[0]?.src} alt="" className="btn-avatar avatar-1" />
+                                <img src={images[1]?.src} alt="" className="btn-avatar avatar-2" />
+                                <img src={images[4]?.src} alt="" className="btn-avatar avatar-3" />
+                                <span className="btn-avatar-badge">+{images.length - 3}</span>
+                            </div>
+
+                            <span className="btn-text">Know me more</span>
+
                             <div className="btn-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
                                 </svg>
                             </div>
                         </Link>

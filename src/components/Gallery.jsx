@@ -1,20 +1,62 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './Gallery.css';
 import { images } from '../data/galleryData';
 
 function Gallery() {
+    const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
+    // Prevent body scroll when image is enlarged
+    useEffect(() => {
+        if (selectedImageIndex !== null) {
+            document.body.style.overflow = 'hidden';
+            return () => {
+                document.body.style.overflow = '';
+            };
+        }
+    }, [selectedImageIndex]);
+
+    const handleNext = useCallback((e) => {
+        if (e) e.stopPropagation();
+        setSelectedImageIndex((prev) => (prev + 1) % images.length);
+    }, []);
+
+    const handleClose = useCallback(() => {
+        setSelectedImageIndex(null);
+    }, []);
+
+    // Keyboard navigation (ArrowRight to advance, Escape to close)
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (selectedImageIndex === null) return;
+            if (e.key === 'Escape') handleClose();
+            if (e.key === 'ArrowRight' || e.key === ' ') handleNext();
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [selectedImageIndex, handleClose, handleNext]);
+
     return (
         <section id="gallery" className="gallery-screen">
-            <Link to="/" className="back-btn">← Home</Link>
+            <Link to="/" viewTransition className="back-btn">← Home</Link>
 
             <div className="gallery-scatter-grid">
                 {images.map(({ cls, src, alt }, index) => (
-                    <div key={index} className={`gallery-parallax-image ${cls}`}>
+                    <div
+                        key={index}
+                        className={`gallery-parallax-image ${cls}`}
+                        onClick={() => setSelectedImageIndex(index)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') setSelectedImageIndex(index);
+                        }}
+                    >
                         <img src={src} alt={alt} decoding="async" />
                     </div>
                 ))}
@@ -27,6 +69,34 @@ function Gallery() {
                     <div className="gallery-rule" />
                 </div>
             </div>
+
+            {/* Enlarged Image View */}
+            {selectedImageIndex !== null && (
+                <div className="enlarged-overlay" onClick={handleClose}>
+                    <div className="enlarged-container" onClick={(e) => e.stopPropagation()}>
+                        <div className="enlarged-image-wrap">
+                            <img
+                                src={images[selectedImageIndex].src}
+                                alt={images[selectedImageIndex].alt}
+                                className="enlarged-img"
+                            />
+                        </div>
+
+                        {/* Cross icon in circle appears to the right out of the image container */}
+                        <button
+                            type="button"
+                            className="enlarged-close-btn"
+                            onClick={handleClose}
+                            aria-label="Close enlarged view"
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            )}
         </section>
     );
 }

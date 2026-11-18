@@ -25,3 +25,30 @@ body,
 }
 
 /* Original .app-container styles can be removed or adapted if needed, but for now we just need the pinned section to be below About */
+
+/* ── Subtle Page Transitions ── */
+::view-transition-old(root) {
+    animation: subtleViewFadeOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+::view-transition-new(root) {
+    animation: subtleViewFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes subtleViewFadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes subtleViewFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
