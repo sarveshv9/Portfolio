@@ -91,13 +91,13 @@
 }
 
 .color-green {
-    color: #00c96b;
-    /* Pastel green */
+    color: #047857;
+    /* Accessible deep emerald green (WCAG AA compliant) */
 }
 
 .color-yellow {
-    color: #ffbf00;
-    /* Warm pastel/golden yellow */
+    color: #b45309;
+    /* Accessible warm amber/golden ochre (WCAG AA compliant) */
 }
 
 .hero-intro {

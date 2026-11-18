@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 /**
  * Text that writes itself, then inks in. No dependencies.
@@ -100,7 +100,6 @@ export function HandwritingText({
   const current = cycle ? words[index % words.length] : text ?? "";
 
   const [font, setFont] = useState(null);
-  const [geom, setGeom] = useState(null);
   const [drawn, setDrawn] = useState(false);
   const [lengths, setLengths] = useState([]);
   const pathRefs = useRef([]);
@@ -119,13 +118,13 @@ export function HandwritingText({
     return () => { cancelled = true; };
   }, [fontUrl]);
 
-  useEffect(() => {
-    if (!font || !current) return;
+  const geom = useMemo(() => {
+    if (!font || !current) return null;
     const path = font.getPath(current, 0, EM, EM);
     const box = path.getBoundingBox();
     const pad = EM * 0.12; // room for the stroke and any descenders
     const full = path.toPathData(2);
-    setGeom({
+    return {
       full,
       // Split on the moveto that opens each contour, keeping the M with its segment.
       contours: full.split(/(?=M)/).filter((d) => d.trim().length > 1),
@@ -133,9 +132,7 @@ export function HandwritingText({
       y: box.y1 - pad,
       w: box.x2 - box.x1 + pad * 2,
       h: box.y2 - box.y1 + pad * 2,
-    });
-    setDrawn(false);
-    setLengths([]);
+    };
   }, [font, current]);
 
   useEffect(() => {
@@ -145,6 +142,7 @@ export function HandwritingText({
         .slice(0, geom.contours.length)
         .map((el) => (el ? el.getTotalLength() : 0)),
     );
+    setDrawn(false);
     // Two frames: the first commits the full-length offsets with no transition, the
     // second enables it and moves to zero. Both in one commit leaves nothing to animate.
     const id = requestAnimationFrame(() =>

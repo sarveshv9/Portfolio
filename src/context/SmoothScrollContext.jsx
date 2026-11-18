@@ -1,14 +1,11 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-const SmoothScrollContext = createContext(null);
-
-export const useSmoothScroll = () => useContext(SmoothScrollContext);
+import { SmoothScrollContext } from './useSmoothScroll';
 
 export const SmoothScrollProvider = ({ children }) => {
-    const [lenis, setLenis] = useState(null);
+    const lenisRef = useRef(null);
 
     useEffect(() => {
         const lenisInstance = new Lenis({
@@ -22,8 +19,7 @@ export const SmoothScrollProvider = ({ children }) => {
             touchMultiplier: 2,
         });
 
-        setLenis(lenisInstance);
-
+        lenisRef.current = lenisInstance;
         lenisInstance.on('scroll', ScrollTrigger.update);
 
         const update = (time) => {
@@ -31,17 +27,22 @@ export const SmoothScrollProvider = ({ children }) => {
         };
 
         gsap.ticker.add(update);
-
         gsap.ticker.lagSmoothing(0);
 
         return () => {
             lenisInstance.destroy();
             gsap.ticker.remove(update);
+            lenisRef.current = null;
         };
     }, []);
 
+    const contextValue = useMemo(() => ({
+        scrollTo: (...args) => lenisRef.current?.scrollTo(...args),
+        getInstance: () => lenisRef.current,
+    }), []);
+
     return (
-        <SmoothScrollContext.Provider value={lenis}>
+        <SmoothScrollContext.Provider value={contextValue}>
             {children}
         </SmoothScrollContext.Provider>
     );

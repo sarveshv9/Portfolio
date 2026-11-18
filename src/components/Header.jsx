@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useSmoothScroll } from '../context/SmoothScrollContext';
+import { useSmoothScroll } from '../context/useSmoothScroll';
 import './Header.css'; // Leaving this import if there are global header styles, though PillNav handles its own layout mostly
 import PillNav from './PillNav';
 

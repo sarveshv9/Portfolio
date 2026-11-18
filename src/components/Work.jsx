@@ -107,7 +107,7 @@ function Work() {
                         <div className="panel-body">
                             {/* Image */}
                             <div className="panel-img-wrap">
-                                <img className="panel-img" src={p.image} alt={p.title} />
+                                <img className="panel-img" src={p.image} alt={p.title} loading="lazy" decoding="async" />
                                 <div className="panel-img-overlay">
                                     <span className="overlay-eyebrow">Key Contribution</span>
                                     <p className="overlay-text">{p.contribution}</p>
@@ -142,7 +142,7 @@ function Work() {
                     {subProjects.map(p => (
                         <a href={p.link} key={p.id} className="sub-card" target="_blank" rel="noopener noreferrer">
                             <div className="sub-card-img">
-                                <img src={p.image} alt={p.title} />
+                                <img src={p.image} alt={p.title} loading="lazy" decoding="async" />
                                 <div className="sub-card-overlay" />
                             </div>
                             <div className="sub-card-body">

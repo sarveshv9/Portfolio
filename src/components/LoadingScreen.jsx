@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { images } from './Gallery';
+import { images } from '../data/galleryData';
 import './LoadingScreen.css';
 
 function LoadingScreen({ onComplete }) {

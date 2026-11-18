@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
-import { useSmoothScroll } from '../context/SmoothScrollContext';
+import { useSmoothScroll } from '../context/useSmoothScroll';
 import './PillNav.css';
 
 const PillNav = ({
@@ -98,7 +98,6 @@ const PillNav = ({
 
         if (initialLoadAnimation) {
             const logo = logoRef.current;
-            const navItems = navItemsRef.current;
 
             if (logo) {
                 gsap.set(logo, { scale: 0 });
@@ -405,6 +404,8 @@ const PillNav = ({
                     className="mobile-menu-button mobile-only"
                     onClick={toggleMobileMenu}
                     aria-label="Toggle menu"
+                    aria-expanded={isMobileMenuOpen}
+                    aria-controls="mobile-nav-menu"
                     ref={hamburgerRef}
                 >
                     <span className="hamburger-line" />
@@ -412,7 +413,7 @@ const PillNav = ({
                 </button>
             </nav>
 
-            <div className="mobile-menu-popover mobile-only" ref={mobileMenuRef} style={cssVars}>
+            <div id="mobile-nav-menu" className="mobile-menu-popover mobile-only" ref={mobileMenuRef} style={cssVars}>
                 <ul className="mobile-menu-list">
                     {items.map((item, i) => (
                         <li key={item.href || `mobile-item-${i}`}>
