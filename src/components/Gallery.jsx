@@ -43,7 +43,15 @@ function Gallery() {
 
     return (
         <section id="gallery" className="gallery-screen">
-            <Link to="/" viewTransition className="back-btn">← Home</Link>
+            <Link to="/" viewTransition className="gallery-home-btn" aria-label="Back to Portfolio">
+                <div className="home-btn-icon" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 19"></polyline>
+                    </svg>
+                </div>
+                <span className="home-btn-label">Home</span>
+            </Link>
 
             <div className="gallery-scatter-grid">
                 {images.map(({ cls, src, alt }, index) => (
@@ -58,6 +66,15 @@ function Gallery() {
                         }}
                     >
                         <img src={src} alt={alt} decoding="async" />
+                        <div className="image-expand-hint" aria-hidden="true">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <polyline points="9 21 3 21 3 15"></polyline>
+                                <line x1="21" y1="3" x2="14" y2="10"></line>
+                                <line x1="3" y1="21" x2="10" y2="14"></line>
+                            </svg>
+                            <span>Expand</span>
+                        </div>
                     </div>
                 ))}
 
@@ -67,6 +84,10 @@ function Gallery() {
                         <span>Me</span>
                     </h2>
                     <div className="gallery-rule" />
+                    <div className="gallery-click-cue">
+                        <span className="cue-dot" aria-hidden="true" />
+                        <span>Click any photo to expand</span>
+                    </div>
                 </div>
             </div>
 

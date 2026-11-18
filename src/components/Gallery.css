@@ -134,27 +134,111 @@
     margin: 0;
 }
 
-/* ── Back Button ── */
-.back-btn {
+.gallery-click-cue {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.4rem 0.95rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-top: 0.25rem;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+}
+
+.gallery-click-cue:hover {
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.cue-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    animation: cueDotPulse 2.2s infinite ease-in-out;
+}
+
+@keyframes cueDotPulse {
+    0%, 100% {
+        opacity: 0.35;
+        transform: scale(0.85);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.25);
+    }
+}
+
+/* ── Refined Home Button ── */
+.gallery-home-btn {
     position: fixed;
     top: 2rem;
     left: 2rem;
-    z-index: 20;
-    padding: 0.55rem 1.4rem;
+    z-index: 30;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.48rem 1.25rem 0.48rem 0.55rem;
     font-family: 'Outfit', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 400;
+    font-size: 0.82rem;
+    font-weight: 500;
     letter-spacing: 0.08em;
-    color: rgba(255, 255, 255, 0.6);
-    background-color: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 50px;
     text-decoration: none;
     cursor: pointer;
-    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    animation: galleryBtnFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: galleryBtnFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.gallery-home-btn .home-btn-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.9);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.gallery-home-btn:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 24px rgba(255, 255, 255, 0.12);
+}
+
+.gallery-home-btn:hover .home-btn-icon {
+    transform: translateX(-3px);
+    background-color: #ffffff;
+    color: #000000;
 }
 
 @keyframes galleryBtnFadeIn {
@@ -168,23 +252,18 @@
     }
 }
 
-.back-btn:hover {
-    color: rgba(255, 255, 255, 0.95);
-    background-color: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
-}
-
-/* ── Image Parallax Wrappers ── */
+/* ── Image Scatter Cards ── */
 .gallery-parallax-image {
     position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    background: #111;
+    border-radius: 6px;
+    background-color: #0b0b0e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        z-index 0s 0.4s;
+    overflow: hidden;
+    transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
+        z-index 0s 0.38s;
     z-index: 1;
     animation: galleryPhotoFadeIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -205,22 +284,59 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: contrast(1.05) brightness(0.88);
-    transition: filter 0.4s ease;
+    filter: contrast(1.04) brightness(0.9);
+    transition: filter 0.35s ease, object-fit 0.35s ease;
 }
 
-/* Hover Zoom */
+/* ── Hover: Reveal the Whole Picture Uncropped with Glow and Expand Cue ── */
 .gallery-parallax-image:hover {
-    transform: scale(1.25);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.15);
+    transform: scale(1.3);
+    box-shadow: 0 25px 65px rgba(0, 0, 0, 0.96), 0 0 35px rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.38);
     z-index: 100;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
         z-index 0s;
 }
 
 .gallery-parallax-image:hover img {
-    filter: contrast(1.1) brightness(1.0);
+    object-fit: contain;
+    filter: contrast(1.08) brightness(1.02);
+}
+
+/* On-card Expand Hint Badge */
+.image-expand-hint {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.28rem 0.6rem;
+    background: rgba(10, 10, 14, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.gallery-parallax-image:hover .image-expand-hint {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ══════════════════════════════════════
@@ -346,55 +462,55 @@
 .sc-img-14 { animation-delay: 0.22s; }
 
 .sc-img-1 {
-    grid-area: 1 / 1 / 3 / 2;
-    align-self: end;
+    grid-area: 1 / 1 / 2 / 3;
+    align-self: center;
     height: 85%;
     width: 90%;
-    justify-self: end;
+    justify-self: center;
 }
 
 .sc-img-2 {
-    grid-area: 1 / 2 / 2 / 3;
+    grid-area: 2 / 1 / 4 / 2;
     width: 85%;
     justify-self: center;
     align-self: center;
-    height: 90%;
+    height: 88%;
 }
 
 .sc-img-3 {
     grid-area: 1 / 3 / 2 / 5;
     align-self: start;
-    height: 80%;
-    width: 95%;
+    height: 82%;
+    width: 94%;
     justify-self: center;
 }
 
 .sc-img-4 {
     grid-area: 1 / 5 / 3 / 6;
-    align-self: end;
+    align-self: center;
     height: 90%;
     width: 85%;
-    justify-self: start;
+    justify-self: center;
 }
 
 .sc-img-5 {
     grid-area: 1 / 6 / 2 / 7;
-    width: 80%;
-    justify-self: start;
+    width: 85%;
+    justify-self: center;
     align-self: center;
     height: 85%;
 }
 
 .sc-img-6 {
-    grid-area: 3 / 1 / 4 / 2;
-    width: 85%;
+    grid-area: 2 / 2 / 4 / 3;
+    width: 88%;
     align-self: center;
     justify-self: center;
-    height: 85%;
+    height: 88%;
 }
 
 .sc-img-7 {
-    grid-area: 2 / 2 / 4 / 3;
+    grid-area: 4 / 1 / 5 / 3;
     align-self: center;
     height: 85%;
     width: 90%;
@@ -403,58 +519,58 @@
 
 .sc-img-8 {
     grid-area: 3 / 5 / 5 / 6;
-    align-self: start;
+    align-self: center;
     height: 90%;
-    width: 95%;
+    width: 90%;
     justify-self: center;
 }
 
 .sc-img-9 {
     grid-area: 2 / 6 / 4 / 7;
     align-self: center;
-    height: 85%;
-    width: 80%;
+    height: 88%;
+    width: 82%;
     justify-self: center;
 }
 
 .sc-img-10 {
-    grid-area: 4 / 1 / 6 / 3;
-    align-self: end;
+    grid-area: 5 / 1 / 6 / 3;
+    align-self: center;
     height: 85%;
-    width: 90%;
-    justify-self: end;
+    width: 92%;
+    justify-self: center;
 }
 
 .sc-img-11 {
     grid-area: 5 / 3 / 6 / 4;
-    align-self: start;
-    height: 90%;
-    width: 85%;
+    align-self: center;
+    height: 85%;
+    width: 88%;
     justify-self: center;
 }
 
 .sc-img-12 {
-    grid-area: 5 / 4 / 6 / 5;
+    grid-area: 4 / 6 / 6 / 7;
     align-self: center;
-    height: 90%;
-    width: 90%;
+    height: 88%;
+    width: 85%;
     justify-self: center;
 }
 
 .sc-img-13 {
-    grid-area: 4 / 6 / 6 / 7;
-    align-self: end;
-    height: 90%;
-    width: 85%;
+    grid-area: 5 / 4 / 6 / 5;
+    align-self: center;
+    height: 85%;
+    width: 88%;
     justify-self: center;
 }
 
 .sc-img-14 {
     grid-area: 5 / 5 / 6 / 6;
     align-self: center;
-    height: 80%;
-    width: 90%;
-    justify-self: end;
+    height: 85%;
+    width: 85%;
+    justify-self: center;
 }
 
 /* ══════════════════════════════════════
@@ -496,11 +612,27 @@
         font-size: 0.65rem;
     }
 
-    .back-btn {
-        top: 0.8rem;
-        left: 0.8rem;
-        padding: 0.35rem 0.8rem;
-        font-size: 0.68rem;
+    .gallery-click-cue {
+        font-size: 0.62rem;
+        padding: 0.3rem 0.75rem;
+        letter-spacing: 0.1em;
+    }
+
+    .gallery-home-btn {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.35rem 0.9rem 0.35rem 0.45rem;
+        font-size: 0.72rem;
+        gap: 0.45rem;
+    }
+
+    .gallery-home-btn .home-btn-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .image-expand-hint {
+        display: none;
     }
 
     .gallery-scatter-grid {
